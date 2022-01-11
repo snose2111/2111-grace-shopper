@@ -13,11 +13,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:clothingName", async (req, res, next) => {
+router.get("/:clothingType", async (req, res, next) => {
   try {
     const clothing = await Clothing.findAll({
       where: {
-        name: req.params.clothingName,
+        type: req.params.clothingType,
       },
     });
     res.json(clothing);
@@ -26,13 +26,9 @@ router.get("/:clothingName", async (req, res, next) => {
   }
 });
 
-router.get("/:clothingName/:clothingId", async (req, res, next) => {
+router.get("/:clothingId", async (req, res, next) => {
   try {
-    const clothing = await Clothing.findAll({
-      where: {
-        name: req.params.clothingName,
-      },
-    });
+    const clothing = await Clothing.Clothing.findByPk(req.params.clothingId);
     res.json(clothing);
   } catch (err) {
     next(err);
@@ -45,5 +41,6 @@ router.put("/:clothingName/:clothingId", async (req, res, next) => {
     res.json(item);
   } catch (err) {
     next(err);
+    git;
   }
 });
