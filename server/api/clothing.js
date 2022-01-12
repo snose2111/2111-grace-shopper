@@ -25,10 +25,10 @@ router.get("/:clothingType", async (req, res, next) => {
   }
 });
 
-router.get("/:clothingId", async (req, res, next) => {
+router.get("/item/:clothingId", async (req, res, next) => {
   try {
-    const clothing = await Clothing.Clothing.findByPk(req.params.clothingId);
-    res.json(clothing);
+    const clothing = await Clothing.findByPk(req.params.clothingId);
+    res.send(clothing);
   } catch (err) {
     next(err);
   }
@@ -50,7 +50,6 @@ router.put("/:clothingId", async (req, res, next) => {
     res.send(await item.update(req.body));
   } catch (err) {
     next(err);
-    git;
   }
 });
 
