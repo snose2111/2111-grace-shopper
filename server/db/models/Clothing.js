@@ -14,15 +14,15 @@ const Clothing = db.define("clothing", {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
   color: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  size: {
     type: Sequelize.STRING,
     allowNull: false,
   },
