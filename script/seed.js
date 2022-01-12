@@ -48,7 +48,7 @@ async function seed() {
     }),
     Clothing.create({
       type: "shoes",
-      name: "Converse X COMME des GARÇONS PLAY",
+      name: "Black Chuck Taylor All Star Platform Hi Sneakers",
       price: 150.0,
       description: "Unisex low top shoe",
       quantity: 23,
@@ -57,7 +57,43 @@ async function seed() {
       imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
     }),
+    Clothing.create({
+      type: "shoes",
+      name: "Beige Summer Daze Chuck 70 sneakers",
+      price: 45.0,
+      description: "Unisex low top shoe",
+      quantity: 23,
+      color: "Grey",
+      rating: 2.39,
+      imageURL:
+        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
+    }),
   ]);
+
+  const users = await Promise.all([
+    User.create({
+      username: "Ataa",
+      password: "password",
+    }),
+    User.create({
+      username: "Lucy",
+      password: "passwordone",
+    }),
+    User.create({
+      username: "Elena",
+      password: "passwordtwo",
+    }),
+    User.create({
+      username: "Admin",
+      password: "adminone",
+      isAdmin: true,
+    }),
+  ]);
+
+  await users[0].addClothing(shoes[0]);
+  await users[1].addClothing(shoes[1]);
+  await users[2].addClothing(shoes[2]);
+  await users[3].addClothing(shoes[3]);
 }
 // const accessories = [
 //   {
