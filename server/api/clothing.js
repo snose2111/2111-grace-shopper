@@ -2,7 +2,6 @@ const router = require("express").Router();
 const {
   models: { Clothing },
 } = require("../db");
-module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
@@ -26,17 +25,10 @@ router.get("/:clothingType", async (req, res, next) => {
   }
 });
 
-<<<<<<< HEAD
 // create item
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Clothing.create(req.body));
-=======
-router.get("/item/:clothingId", async (req, res, next) => {
-  try {
-    const clothing = await Clothing.findByPk(req.params.clothingId);
-    res.send(clothing);
->>>>>>> 79c4efe9261da92dcd6f256c26abfba45c3a6cd3
   } catch (err) {
     next(err);
   }
