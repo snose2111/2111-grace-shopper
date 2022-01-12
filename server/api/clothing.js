@@ -26,7 +26,17 @@ router.get("/:clothingType", async (req, res, next) => {
   }
 });
 
-router.get("/:clothingId", async (req, res, next) => {
+// create item
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Clothing.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// get individual item
+router.get("/item/:clothingId", async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
     res.json(item);
@@ -35,11 +45,26 @@ router.get("/:clothingId", async (req, res, next) => {
   }
 });
 
-router.put("/:clothingId", async (req, res, next) => {
+// update individual item
+router.put("/item/:clothingId", async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
-    res.json(item);
+    res.send(await item.update(req.body));
+  } catch (err) {
+    next(err);
+    git;
+  }
+});
+
+// delete item
+router.delete("/item/:clothingId", async (req, res, next) => {
+  try {
+    const item = await Clothing.findByPk(req.params.clothingId);
+    await item.destroy();
+    res.send(item);
   } catch (err) {
     next(err);
   }
 });
+
+module.exports = router;
