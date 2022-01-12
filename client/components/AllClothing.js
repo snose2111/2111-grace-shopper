@@ -1,6 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 
+const dummyClothing = [
+  {
+    type: "shoes",
+    name: "Converse X COMME des GARÇONS PLAY",
+    price: 150.0,
+    description: "Unisex high top shoe",
+    quantity: 80,
+    color: "Grey",
+    rating: 4.66,
+    imageUrl:
+      "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
+  },
+  {
+    type: "shoes",
+    name: "Converse X COMME des GARÇONS PLAY",
+    price: 150.0,
+    description: "Unisex low top shoe",
+    quantity: 68,
+    color: "Navy",
+    rating: 3.47,
+    imageUrl:
+      "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M237001_1/comme-des-garcons-play-blue-converse-edition-half-heart-chuck-70-sneakers.jpg",
+  },
+];
+
 export class AllClothing extends React.Component {
   render() {
     return <div className="all-clothing">All Clothing Here</div>;

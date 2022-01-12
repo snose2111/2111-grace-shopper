@@ -37,8 +37,17 @@ router.post("/", async (req, res, next) => {
 // get individual item
 router.get("/item/:clothingId", async (req, res, next) => {
   try {
-    const item = await Clothing.findByPk(req.params.clothingId);
-    res.json(item);
+    const clothing = await Clothing.Clothing.findByPk(req.params.clothingId);
+    res.json(clothing);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// create item
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Clothing.create(req.body));
   } catch (err) {
     next(err);
   }
@@ -51,6 +60,7 @@ router.put("/item/:clothingId", async (req, res, next) => {
     res.send(await item.update(req.body));
   } catch (err) {
     next(err);
+    git;
   }
 });
 
