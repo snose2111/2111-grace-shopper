@@ -2,7 +2,6 @@ const router = require("express").Router();
 const {
   models: { Clothing },
 } = require("../db");
-module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
@@ -35,12 +34,35 @@ router.get("/:clothingId", async (req, res, next) => {
   }
 });
 
-router.put("/:clothingName/:clothingId", async (req, res, next) => {
+// create item
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Clothing.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update individual item
+router.put("/:clothingId", async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
-    res.json(item);
+    res.send(await item.update(req.body));
   } catch (err) {
     next(err);
     git;
   }
 });
+
+// delete item
+router.delete("/:clothingId", async (req, res, next) => {
+  try {
+    const item = await Clothing.findByPk(req.params.clothingId);
+    await item.destroy();
+    res.send(item);
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = router;
