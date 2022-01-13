@@ -143,6 +143,10 @@ async function seed() {
     }),
   ]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf81b3bdae68f64b98d7345228bcebcce13c9285
 
   const tops = await Promise.all([
     Clothing.create({
@@ -196,7 +200,11 @@ async function seed() {
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
   ]);
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> bf81b3bdae68f64b98d7345228bcebcce13c9285
 }
 // const accessories = [
 //   {
@@ -410,7 +418,11 @@ async function seed() {
 //     console.log(err);
 //   }
 // };
+<<<<<<< HEAD
 >>>>>>> 4c1da0ddbfa914222248cb13a24121add7e8b9c0
+=======
+
+>>>>>>> bf81b3bdae68f64b98d7345228bcebcce13c9285
 
   const bottoms = await Promise.all([
     Clothing.create({
