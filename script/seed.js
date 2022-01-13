@@ -90,63 +90,59 @@ async function seed() {
     }),
   ]);
 
-  await users[0].addClothing(shoes[0]);
-  await users[1].addClothing(shoes[1]);
-  await users[2].addClothing(shoes[2]);
-  await users[3].addClothing(shoes[3]);
+  const accessories = await Promise.all([
+    Clothing.create({
+      type: "accessories",
+      name: "1.5mm Black Diamond Prong WG TL BVLA",
+      price: 140.0,
+      description: "earring",
+      color: "gold",
+      quantity: 5,
+      imageUrl:
+        "https://www.ninemoonspiercings.com/uploads/1/3/1/5/131540467/s939830397503292869_p463_i3_w2700.jpeg?width=2560?width=800",
+    }),
+    Clothing.create({
+      type: "accessories",
+      name: "Chubby Huggy Hoop, Silver (Single)",
+      price: 38.0,
+      description: "earring",
+      color: "silver",
+      quantity: 24,
+      imageUrl:
+        "https://www.catbirdnyc.com/media/catalog/product/cache/76a94e0cda397936c0138d2cf05d7fe1/h/u/huggiehoop-ss-p1.jpg",
+    }),
+    Clothing.create({
+      type: "accessories",
+      name: "Sweet Nothing Bracelet",
+      price: 98.0,
+      description: "bracelet",
+      color: "gold",
+      quantity: 40,
+      imageUrl:
+        "https://www.catbirdnyc.com/media/catalog/product/cache/76a94e0cda397936c0138d2cf05d7fe1/c/a/catbird-sweetnothingbracelet-yg-p1.jpg",
+    }),
+    Clothing.create({
+      type: "accessories",
+      name: "Mini Cloud Bag",
+      price: 46.0,
+      description: "bag",
+      color: "apricot",
+      quantity: 39,
+      imageUrl:
+        "https://cdn.shopify.com/s/files/1/0851/3262/products/ea0316b8321c0af3b622b767c4c316141582bc2e-2048x2560_1200x1500.jpg?v=1629414849",
+    }),
+    Clothing.create({
+      type: "accessories",
+      name: "Pink & Gold Barocco Print Scarf",
+      price: 129.0,
+      description: "scarf",
+      color: "pink",
+      quantity: 12,
+      imageUrl:
+        "https://img.ssensemedia.com/images/f_auto,q_auto:best/212404F029000_1/versace-pink-and-gold-barocco-print-scarf.jpg",
+    }),
+  ]);
 }
-// const accessories = [
-//   {
-//     type: "accessories",
-//     name: "1.5mm Black Diamond Prong WG TL BVLA",
-//     price: 140.0,
-//     description: "earring",
-//     color: "gold",
-//     quantity: 5,
-//     imageUrl:
-//       "https://www.ninemoonspiercings.com/uploads/1/3/1/5/131540467/s939830397503292869_p463_i3_w2700.jpeg?width=2560?width=800",
-//   },
-//   {
-//     type: "accessories",
-//     name: "Chubby Huggy Hoop, Silver (Single)",
-//     price: 38.0,
-//     description: "earring",
-//     color: "silver",
-//     quantity: 24,
-//     imageUrl:
-//       "https://www.catbirdnyc.com/media/catalog/product/cache/76a94e0cda397936c0138d2cf05d7fe1/h/u/huggiehoop-ss-p1.jpg",
-//   },
-//   {
-//     type: "accessories",
-//     name: "Sweet Nothing Bracelet",
-//     price: 98.0,
-//     description: "bracelet",
-//     color: "gold",
-//     quantity: 40,
-//     imageUrl:
-//       "https://www.catbirdnyc.com/media/catalog/product/cache/76a94e0cda397936c0138d2cf05d7fe1/c/a/catbird-sweetnothingbracelet-yg-p1.jpg",
-//   },
-//   {
-//     type: "accessories",
-//     name: "Mini Cloud Bag",
-//     price: 46.0,
-//     description: "bag",
-//     color: "apricot",
-//     quantity: 39,
-//     imageUrl:
-//       "https://cdn.shopify.com/s/files/1/0851/3262/products/ea0316b8321c0af3b622b767c4c316141582bc2e-2048x2560_1200x1500.jpg?v=1629414849",
-//   },
-//   {
-//     type: "accessories",
-//     name: "Pink & Gold Barocco Print Scarf",
-//     price: 129.0,
-//     description: "scarf",
-//     color: "pink",
-//     quantity: 12,
-//     imageUrl:
-//       "https://img.ssensemedia.com/images/f_auto,q_auto:best/212404F029000_1/versace-pink-and-gold-barocco-print-scarf.jpg",
-//   },
-// ];
 
 // const tops = [
 //   {
