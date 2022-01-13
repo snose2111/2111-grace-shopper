@@ -4,8 +4,13 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import clothingReducer from "./clothing";
+import itemReducer from "./item";
 
-const reducer = combineReducers({ auth: auth, clothing: clothingReducer });
+const reducer = combineReducers({
+  auth: auth,
+  clothing: clothingReducer,
+  item: itemReducer,
+});
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
