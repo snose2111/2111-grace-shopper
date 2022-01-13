@@ -11,23 +11,24 @@ export class SingleItem extends React.Component {
     let item = this.props.item;
     return (
       <div>
-        {!item.id ? (
+        {!item ? (
+          <p>Whoops! Something went wrong.</p>
+        ) : !item.id ? (
           <p>Loading item...</p>
         ) : (
-          <div className="single-view">
-            <div className="single-item-picture">
+          <div className="single-view-container">
+            <div className="single-view-picture" width="400" height="500">
               <img src={item.imageUrl} width="400" />
             </div>
 
-            <div className="single-item-information">
-              <button>Back</button>
-              <h1>{item.name}</h1>
-              <h1>${item.price}</h1>
-              <div className="item-descrip">
-                <h3>Details</h3>
-                <p>{item.description}</p>
+            <div className="single-view-card">
+              <div id="item-info">
+                <span id="single-item-name">{item.name}</span>
+                <span id="single-item-descrip">{item.description}</span>
+                <span id="single-item-price">${item.price}</span>
               </div>
-              <div className="item-buttons">
+
+              <div className="item-qty">
                 <label htmlFor="quantity">Quantity: </label>
                 <input
                   name="quantity"
@@ -36,8 +37,9 @@ export class SingleItem extends React.Component {
                   max={item.quantity}
                   defaultValue="1"
                 />
-
-                <button>Add to Cart</button>
+              </div>
+              <div className="item-cart">
+                <button id="big-cart">Add to Cart</button>
               </div>
             </div>
           </div>
