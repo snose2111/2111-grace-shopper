@@ -36,9 +36,9 @@ export class Homepage extends React.Component {
             <button id="special-button">Shop Now</button>
           </div>
         </div>
-
+        <span>Shop By Category</span>
         <div className="categories">
-          <h2>Shop By Category</h2>
+
           <div className="category">
             <img src="https://cdn.shopify.com/s/files/1/0047/0705/7752/products/PS-BellaCanvas-3001T-B2copy_0aa70df6-7c89-4b74-86ef-f64833bbef7e_256x.jpg?v=1639001512"/>
             <h4>Tops</h4>
