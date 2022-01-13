@@ -24,6 +24,7 @@ const dummyClothing = [
     imageUrl:
       "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M237001_1/comme-des-garcons-play-blue-converse-edition-half-heart-chuck-70-sneakers.jpg",
   },
+
   {
     type: "shoes",
     name: "Converse X COMME des GARÇONS PLAY",
@@ -57,6 +58,7 @@ const dummyClothing = [
     imageURL:
       "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
   },
+
 ];
 
 export class AllClothing extends React.Component {
