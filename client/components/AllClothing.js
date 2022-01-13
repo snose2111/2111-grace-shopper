@@ -39,7 +39,7 @@ export class AllClothing extends React.Component {
                     <div>
                       <div id="info-row">
                         <span id="all-view-item-name">{item.name}</span>
-                        <span id="all-view-item-price">${item.price}</span>
+                        <span id="all-view-item-price">{item.price}</span>
                       </div>
                       <span id="all-view-item-description">
                         {item.description}
