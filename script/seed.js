@@ -89,11 +89,6 @@ async function seed() {
       isAdmin: true,
     }),
   ]);
-
-  await users[0].addClothing(shoes[0]);
-  await users[1].addClothing(shoes[1]);
-  await users[2].addClothing(shoes[2]);
-  await users[3].addClothing(shoes[3]);
 }
 // const accessories = [
 //   {
