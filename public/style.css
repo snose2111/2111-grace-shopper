@@ -23,6 +23,10 @@ form div {
   display: inline-block;
 }
 
+#special-button {
+  font-size: 20px;
+}
+
 button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
@@ -101,4 +105,14 @@ button {
 
 #all-view-item-button {
   align-items: flex-end;
+}
+/*this is my styling for my homepage component, this should be added to a new file once tenzin makes her pull request*/
+.special-collection {
+  display: flex;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex: 50%
 }
