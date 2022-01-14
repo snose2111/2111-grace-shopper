@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import Homepage from './components/Homepage'
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import Homepage from "./components/Homepage";
 import AllClothing from "./components/AllClothing";
 import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
@@ -41,7 +41,6 @@ class Routes extends Component {
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
-
           </Switch>
         )}
       </div>
