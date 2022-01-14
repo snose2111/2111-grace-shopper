@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../store/item";
+import { Rating } from "react-simple-star-rating";
 
 export class SingleItem extends React.Component {
   componentDidMount() {
@@ -25,6 +26,10 @@ export class SingleItem extends React.Component {
               <div id="item-info">
                 <span id="single-item-name">{item.name}</span>
                 <span id="single-item-descrip">{item.description}</span>
+                <span id="rating">
+                  Rating: <Rating initialValue={item.rating} size={20} />{" "}
+                  {item.rating} stars
+                </span>
                 <span id="single-item-price">${item.price}</span>
               </div>
 

@@ -30,6 +30,10 @@ span#single-item-name {
 }
 
 span#single-item-descrip {
+  font-size: 14px;
+}
+
+span#rating {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
