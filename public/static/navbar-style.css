@@ -1,0 +1,14 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.type {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: bottom;
+  font-size: smaller;
+  font-weight: lighter;
+}
