@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Clothing },
+  models: { User, Clothing, Cart },
 } = require("../server/db");
 /**
  * seed - this function clears the database, updates tables to
@@ -248,6 +248,25 @@ async function seed() {
         "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/211236F088057_1/collina-strada-ssense-exclusive-pink-flower-patch-shorts.jpg",
     }),
   ]);
+
+  const cart1 = await Cart.create();
+  await users[0].addCart(cart1);
+  await cart1.addClothing(tops[1], {
+    through: { price: tops[1].price * 2, quantity: 2 },
+  });
+  await cart1.addClothing(bottoms[2], {
+    through: { price: bottoms[2].price, quantity: 1 },
+  });
+
+  const cart2 = await Cart.create();
+  await users[2].addCart(cart2);
+
+  await cart2.addClothing(shoes[3], {
+    through: { price: shoes[3].price, quantity: 1 },
+  });
+  await cart2.addClothing(accessories[4], {
+    through: { price: accessories[4].price * 3, quantity: 3 },
+  });
 }
 
 /*
