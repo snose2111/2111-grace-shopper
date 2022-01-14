@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store";
+import { BsSearch, BsCart4 } from "react-icons/bs";
+import { AiOutlineHome } from "react-icons/ai";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div className="nav-container">
+  <div>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -15,35 +17,37 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </a>
         </div>
       ) : (
-        <div className="nav-bar">
-          <div className="left-nav-bar">
+        <div className="main-nav">
+          <div className="left-navbar">
             {/* The navbar will show these links before you log in */}
-            <Link to="/">LOGO</Link>
-            <Link to="/search">Search</Link>
+            {/* <a href="/">{<AiOutlineHome />}LOGO</a> */}
+            <a href="/">LOGO</a>
+            <span className="search-button">
+              <input type="text" placeholder="Search..." />
+              <button>
+                {
+                  <BsSearch
+                    style={{ backgroundColor: "black", color: "white" }}
+                  />
+                }
+              </button>
+            </span>
           </div>
           <div className="type">
-            <Link to="/tops">
-              <h5>TOPS</h5>
-            </Link>
-            <Link to="/bottoms">
-              <h5>BOTTOMS</h5>
-            </Link>
-            <Link to="/accessories">
-              <h5>ACCESSORIES</h5>
-            </Link>
-            <Link to="/shoes">
-              <h5>SHOES</h5>
-            </Link>
+            <a href="/tops">Tops</a>
+            <a href="/bottoms">Bottoms</a>
+            <a href="/accessories">Accessories</a>
+            <a href="/shoes">Shoes</a>
           </div>
-          <div className="right-nav-bar">
-            <Link to="/login">Login</Link>
-            {/* <Link to="/signup">Sign Up</Link> */}
-            <Link to="/cart">Cart(3)</Link>
+          <div className="right-navbar">
+            {/* The navbar will show these links before you log in */}
+            <a href="/login">Login</a>
+            <a href="/cart">{<BsCart4 />} Cart (3)</a>
           </div>
         </div>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </div>
 );
 

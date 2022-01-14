@@ -1,7 +1,21 @@
 @import "navbar-style.css";
+@import "color.css";
+
+.App {
+  width: 100vw;
+  height: 100vh;
+}
 
 body {
   font-family: sans-serif;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 a {
