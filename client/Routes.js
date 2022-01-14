@@ -5,6 +5,7 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import AllClothing from "./components/AllClothing";
 import NewItem from "./components/NewItem";
+import Cart from "./components/Cart";
 import { me } from "./store";
 
 /**
@@ -20,7 +21,6 @@ class Routes extends Component {
 
     return (
       <div>
-       
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
@@ -33,6 +33,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/allclothing" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
+            <Route path="/cart" component={Cart} />
           </Switch>
         )}
       </div>
