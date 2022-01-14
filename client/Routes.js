@@ -7,6 +7,7 @@ import Homepage from './components/Homepage'
 import AllClothing from "./components/AllClothing";
 import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
+import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import { me } from "./store";
 
@@ -30,7 +31,7 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={NewItem} />
+            <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/shop/all" component={AllClothing} />
@@ -38,7 +39,9 @@ class Routes extends Component {
             <Route path="/shop/:category" component={AllClothing} />
             <Route path="/allclothing" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
+            <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
+
           </Switch>
         )}
       </div>

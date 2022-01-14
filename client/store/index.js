@@ -4,6 +4,10 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import clothingReducer from "./clothing";
+import usersReducer from "./allUsers";
+import createNewItemReducer from "./createNewItem"
+
+const reducer = combineReducers({ auth: auth, clothing: clothingReducer, users: usersReducer, newItem: createNewItemReducer  });
 import itemReducer from "./item";
 
 const reducer = combineReducers({
