@@ -1,22 +1,14 @@
-<<<<<<< HEAD
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm/AuthForm";
-import Home from "./components/Home/Home";
-=======
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import Homepage from './components/Homepage'
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import Homepage from "./components/Homepage";
 import AllClothing from "./components/AllClothing";
 import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
 import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
->>>>>>> main
 import { me } from "./store";
 
 /**
@@ -41,8 +33,6 @@ class Routes extends Component {
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
-<<<<<<< HEAD
-=======
             <Route path="/signup" component={Signup} />
             <Route exact path="/shop/all" component={AllClothing} />
             <Route exact path="/shop/item/:itemID" component={SingleItem} />
@@ -51,8 +41,6 @@ class Routes extends Component {
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
-
->>>>>>> main
           </Switch>
         )}
       </div>
