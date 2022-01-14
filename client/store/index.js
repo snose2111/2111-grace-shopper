@@ -8,6 +8,13 @@ import usersReducer from "./allUsers";
 import createNewItemReducer from "./createNewItem"
 
 const reducer = combineReducers({ auth: auth, clothing: clothingReducer, users: usersReducer, newItem: createNewItemReducer  });
+import itemReducer from "./item";
+
+const reducer = combineReducers({
+  auth: auth,
+  clothing: clothingReducer,
+  item: itemReducer,
+});
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

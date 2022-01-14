@@ -1,3 +1,6 @@
+@import "singleitem-style.css";
+@import "cartview-style.css";
+
 body {
   font-family: sans-serif;
 }
@@ -18,6 +21,10 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#special-button {
+  font-size: 20px;
 }
 
 button {
@@ -98,4 +105,14 @@ button {
 
 #all-view-item-button {
   align-items: flex-end;
+}
+/*this is my styling for my homepage component, this should be added to a new file once tenzin makes her pull request*/
+.special-collection {
+  display: flex;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex: 50%
 }
