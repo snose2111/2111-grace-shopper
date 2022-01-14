@@ -37,7 +37,7 @@ router.post("/", async (req, res, next) => {
 // get individual item
 router.get("/item/:clothingId", async (req, res, next) => {
   try {
-    const clothing = await Clothing.Clothing.findByPk(req.params.clothingId);
+    const clothing = await Clothing.findByPk(req.params.clothingId);
     res.json(clothing);
   } catch (err) {
     next(err);
