@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import AllClothing from "./components/AllClothing";
+import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
 import Cart from "./components/Cart";
 import { me } from "./store";
@@ -31,6 +32,9 @@ class Routes extends Component {
             <Route path="/" exact component={NewItem} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/shop/all" component={AllClothing} />
+            <Route exact path="/shop/item/:itemID" component={SingleItem} />
+            <Route path="/shop/:category" component={AllClothing} />
             <Route path="/allclothing" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
             <Route path="/cart" component={Cart} />
