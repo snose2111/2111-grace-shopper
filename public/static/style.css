@@ -7,8 +7,8 @@
 }
 
 body {
+  position: fixed;
   font-family: sans-serif;
-  background-attachment: fixed;
   display: flex;
   justify-content: center;
   text-align: center;
