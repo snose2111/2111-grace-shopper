@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { user } = require("pg/lib/defaults");
 const {
-  models: { User },
+  models: { User, Clothing },
 } = require("../db");
 module.exports = router;
 
@@ -33,9 +33,32 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-// router.get("/cart", async (req, res, next) => {
-//   try {
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+// load a single user
+
+router.get("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    res.json(user)
+  }
+  catch (err) {
+    next (err)
+  }
+});
+
+
+router.get(":userId/cart", async (req, res, next) => {
+  try {
+    const cart = await User.findByPk({
+      include: [{
+        model: Clothing,
+        where: {
+          userId: req.params.id
+      }}]
+    });
+
+    res.json(cart)
+  }
+  catch (err) {
+    next(err);
+  }
+});

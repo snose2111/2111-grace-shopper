@@ -25,10 +25,21 @@ router.get("/:clothingType", async (req, res, next) => {
   }
 });
 
+// create item
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Clothing.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// get individual item
 router.get("/item/:clothingId", async (req, res, next) => {
   try {
+    console.log(req.params.clothingId);
     const clothing = await Clothing.findByPk(req.params.clothingId);
-    res.send(clothing);
+    res.json(clothing);
   } catch (err) {
     next(err);
   }
@@ -50,6 +61,7 @@ router.put("/item/:clothingId", async (req, res, next) => {
     res.send(await item.update(req.body));
   } catch (err) {
     next(err);
+    git;
   }
 });
 
