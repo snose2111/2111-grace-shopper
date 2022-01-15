@@ -34,10 +34,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </span>
         </div>
         <div className="type">
-          <a href="/tops">👕 Tops</a>
-          <a href="/bottoms">👖 Bottoms</a>
-          <a href="/accessories">🧢 Accessories</a>
-          <a href="/shoes">👟 Shoes</a>
+          <Link to="/shop/all">Shop All</Link>
+          <Link to="/shop/tops">👕 Tops</Link>
+          <Link to="/shop/bottoms">👖 Bottoms</Link>
+          <Link to="/shop/accessories">🧢 Accessories</Link>
+          <Link to="/shop/shoes">👟 Shoes</Link>
         </div>
         <div className="right-navbar">
           {/* The navbar will show these links before you log in */}
