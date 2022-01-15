@@ -37,6 +37,7 @@ router.post("/", async (req, res, next) => {
 // get individual item
 router.get("/item/:clothingId", async (req, res, next) => {
   try {
+    console.log(req.params.clothingId);
     const clothing = await Clothing.findByPk(req.params.clothingId);
     res.json(clothing);
   } catch (err) {
@@ -60,7 +61,6 @@ router.put("/item/:clothingId", async (req, res, next) => {
     res.send(await item.update(req.body));
   } catch (err) {
     next(err);
-    git;
   }
 });
 

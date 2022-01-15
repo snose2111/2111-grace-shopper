@@ -2,11 +2,13 @@ import axios from 'axios';
 const CREATE_ITEM = 'CREATE_ITEM';
 
 //ACTION CREATORS
-export const _createNewItem = (item) => ({
-   
-  type: CREATE_ITEM,
-  item
-});
+export const _createNewItem = (item) => {
+    console.log(`*** createNewItem action CREATOR - item ->${item}` )
+    return {
+      type: CREATE_ITEM,
+      item,
+    };
+  };
 
 //THUNK CREATOR
 export const createNewItem = (newItem) => {
@@ -25,7 +27,8 @@ export const createNewItem = (newItem) => {
 export default function createNewItemReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_ITEM:
-      return [...state, action.item];
+        console.log(`*** createNewItem reducer - item ->${action.item}` )
+      return action.item;
       default:
         return state;
   }

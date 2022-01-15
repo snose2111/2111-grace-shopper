@@ -1,0 +1,8 @@
+:root {
+  --navbar-color: rgb(0, 0, 0);
+  --navbar-lv: rgb(255, 255, 255);
+  --button-color: red;
+  --home-color: blue;
+}
+
+/* background-color: var(--navbar-color); */
