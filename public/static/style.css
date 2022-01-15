@@ -23,11 +23,11 @@ body {
 }
 
 #navbar {
-  height: 20%;
+  height: 100px;
 }
 
 #routes {
-  height: 70%;
+  height: 800px;
 }
 
 button:hover {

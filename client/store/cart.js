@@ -13,9 +13,8 @@ export const setCart = (cart) => {
 
 // thunk
 export const fetchCart = () => {
-  const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
-    const { data: cart } = await axios.get(`/cart/${token}`);
+    const { data: cart } = await axios.get(`/cart`);
     dispatch(setCart(cart));
   };
 };

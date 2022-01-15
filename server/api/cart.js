@@ -19,9 +19,9 @@ router.get("/:cartId", async (req, res, next) => {
   }
 });
 
-router.get("/:token", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const user = User.findByToken(req.params.token);
+    const user = User.findByToken(req.headers.authorization);
     if (user) {
       const cart = await Cart.findAll({
         where: {
