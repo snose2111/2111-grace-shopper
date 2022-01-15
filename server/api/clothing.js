@@ -61,7 +61,6 @@ router.put("/item/:clothingId", async (req, res, next) => {
     res.send(await item.update(req.body));
   } catch (err) {
     next(err);
-    git;
   }
 });
 
