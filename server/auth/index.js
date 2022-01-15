@@ -4,7 +4,7 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body)}); 
+    res.send({ token: await User.authenticate(req.body)});
   } catch (err) {
     next(err)
   }
@@ -23,7 +23,7 @@ router.post('/signup', async (req, res, next) => {
     }
   }
 })
-
+//can probably use this axios call to verify users to make sure they only have access to their cart, their order history, etc.
 router.get('/me', async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization))
