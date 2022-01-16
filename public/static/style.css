@@ -2,6 +2,7 @@
 @import "color.css";
 @import "singleitem-style.css";
 @import "cartview-style.css";
+@import "newitem.css";
 
 .App {
   width: 100vw;
@@ -90,6 +91,8 @@ button {
   font-size: 12px;
   font-weight: bold;
 }
+
+
 
 .all-view-header-buttons {
   display: flex;
