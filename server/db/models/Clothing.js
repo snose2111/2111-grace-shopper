@@ -29,6 +29,9 @@ const Clothing = db.define("clothing", {
   rating: {
     type: Sequelize.DECIMAL(3, 2),
   },
+  imageUrl: {
+    type: Sequelize.STRING,
+  }
 });
 
 module.exports = Clothing;
