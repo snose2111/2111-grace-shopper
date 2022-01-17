@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import fetchCart from "../store/cart";
 
 let dummyData = [
   {
@@ -36,6 +38,10 @@ let dummyData = [
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
 export class Cart extends React.Component {
+  componentDidMount() {
+    this.props.getCart();
+  }
+
   render() {
     const subtotal = dummyData.map((item) => item.price).reduce(reducer);
     const tax = subtotal * 0.08875;
@@ -100,4 +106,14 @@ export class Cart extends React.Component {
   }
 }
 
-export default Cart;
+const mapState = (state) => {
+  return { cart: state.cart };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    getCart: () => dispatch(fetchCart()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Cart);

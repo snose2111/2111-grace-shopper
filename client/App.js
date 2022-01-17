@@ -4,9 +4,13 @@ import Routes from "./Routes";
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Routes />
+    <div id="app">
+      <div id="navbar">
+        <Navbar />
+      </div>
+      <div id="routes">
+        <Routes />
+      </div>
     </div>
   );
 };

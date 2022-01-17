@@ -9,11 +9,25 @@
 }
 
 body {
-  position: fixed;
   font-family: sans-serif;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   text-align: center;
+  flex-direction: column; */
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#navbar {
+  height: 100px;
+}
+
+#routes {
+  height: 800px;
 }
 
 button:hover {
