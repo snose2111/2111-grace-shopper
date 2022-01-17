@@ -36,6 +36,7 @@ const dummyCart = [
 
 // action type
 const SET_CART = "SET_CART";
+const ADD_CART_ITEM = "ADD_CART_ITEM";
 
 // action creator
 export const setCart = (cart) => {
@@ -45,11 +46,36 @@ export const setCart = (cart) => {
   };
 };
 
+export const addCartItem = (item) => {
+  return {
+    type: ADD_CART_ITEM,
+    item,
+  };
+};
+
 // thunk
 export const fetchCart = () => {
   return async (dispatch) => {
-    console.log(window.localStorage.getItem("token"));
     dispatch(setCart(dummyCart));
+  };
+};
+
+export const addToCart = (itemId) => {
+  return async (dispatch) => {
+    // probably want to fetch item from database by its id
+    // then if the user is logged in & everything's authenticated, add it to that user's cart
+    // otherwise just add it to guest cart
+    const dummyItem = {
+      type: "shirt",
+      name: "T-shirt",
+      price: 120.0,
+      description: "Blue shirt",
+      color: "blue",
+      quantity: 1,
+      ImageURL:
+        "https://img.ssensemedia.com/images/f_auto,q_auto:best/202387F090217_1/kenzo-orange-straight-miniskirt.jpg",
+    };
+    dispatch(addCartItem(dummyItem));
   };
 };
 
@@ -58,6 +84,8 @@ export default function cartReducer(state = [], action) {
   switch (action.type) {
     case SET_CART:
       return action.cart;
+    case ADD_CART_ITEM:
+      return [...state, action.item];
     default:
       return state;
   }

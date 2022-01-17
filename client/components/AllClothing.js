@@ -1,14 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchClothing } from "../store/clothing";
+import { addToCart } from "../store/cart";
 
 export class AllClothing extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.props.getClothing();
+  }
+
+  handleClick(evt) {
+    this.props.addToCart(evt.target.value);
   }
 
   render() {
@@ -46,7 +52,13 @@ export class AllClothing extends React.Component {
                       </span>
                     </div>
 
-                    <button id="all-view-item-button">Add to Cart</button>
+                    <button
+                      id="all-view-item-button"
+                      value={item} // want to pass in item Id probably
+                      onClick={this.handleClick}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               );
@@ -61,12 +73,13 @@ export class AllClothing extends React.Component {
 }
 
 const mapState = (state) => {
-  return { clothing: state.clothing };
+  return { clothing: state.clothing, cart: state.cart };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getClothing: () => dispatch(fetchClothing()),
+    addToCart: (itemId) => dispatch(addToCart(itemId)),
   };
 };
 
