@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchClothing } from "../store/clothing";
 import { addToCart } from "../store/cart";
+import { Link } from "react-router-dom";
 
 export class AllClothing extends React.Component {
   constructor(props) {
@@ -35,21 +36,23 @@ export class AllClothing extends React.Component {
               return (
                 <div key={item.id} className="all-view-single-card">
                   <div className="all-view-img">
-                    <img
-                      src="https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221288F120000_1/proenza-schouler-off-white-canvas-city-lug-lace-up-derbys.jpg"
-                      width="200px"
-                    />
+                    <Link to={`/shop/item/${item.id}`}>
+                      <img src={item.imageUrl} width="200px" />
+                    </Link>
                   </div>
 
                   <div className="all-view-item-info">
                     <div>
-                      <div id="info-row">
-                        <span id="all-view-item-name">{item.name}</span>
-                        <span id="all-view-item-price">{item.price}</span>
-                      </div>
-                      <span id="all-view-item-description">
-                        {item.description}
-                      </span>
+                      <Link to={`/shop/item/${item.id}`}>
+                        <div id="info-row">
+                          <span id="all-view-item-name">{item.name}</span>
+                          <span id="all-view-item-price">{item.price}</span>
+                        </div>
+
+                        <span id="all-view-item-description">
+                          {item.description}
+                        </span>
+                      </Link>
                     </div>
 
                     <button

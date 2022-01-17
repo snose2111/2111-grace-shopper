@@ -1,10 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../store/item";
+import { addToCart } from "../store/cart";
 
 export class SingleItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
   componentDidMount() {
     this.props.getItem(this.props.match.params.itemID);
+  }
+
+  handleClick(evt) {
+    this.props.addToCart(evt.target.value);
   }
 
   render() {
@@ -39,7 +48,13 @@ export class SingleItem extends React.Component {
                 />
               </div>
               <div className="item-cart">
-                <button id="big-cart">Add to Cart</button>
+                <button
+                  id="big-cart"
+                  value={item.id}
+                  onClick={this.handleClick}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
@@ -50,12 +65,13 @@ export class SingleItem extends React.Component {
 }
 
 const mapState = (state) => {
-  return { item: state.item };
+  return { item: state.item, cart: state.cart };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getItem: (itemId) => dispatch(fetchItem(itemId)),
+    addToCart: (itemId) => dispatch(addToCart(itemId)),
   };
 };
 
