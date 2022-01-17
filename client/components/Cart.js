@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import fetchCart from "../store/cart";
+import {fetchCart} from "../store/cart";
 
 let dummyData = [
   {
@@ -39,10 +39,12 @@ const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
 export class Cart extends React.Component {
   componentDidMount() {
-    this.props.getCart();
+    this.props.getCart(this.props.user);
   }
 
   render() {
+    // const dummyData = this.props.cart
+    console.log("these are my props ", this.props)
     const subtotal = dummyData.map((item) => item.price).reduce(reducer);
     const tax = subtotal * 0.08875;
     return (
@@ -71,7 +73,7 @@ export class Cart extends React.Component {
                   </div>
                 </div>
                 <div id="right">
-                  <span>${item.price} USD</span>
+                  <span>{item.price} USD</span>
                   <button id="remove-button">Remove</button>
                 </div>
               </div>
@@ -84,10 +86,10 @@ export class Cart extends React.Component {
                 <span className="total">Order Total</span>
               </div>
               <div id="right">
-                <span>${subtotal}</span>
+                <span>{subtotal}</span>
                 <span>Calculated at checkout</span>
-                <span>${tax}</span>
-                <span className="total">${subtotal + tax}</span>
+                <span>{tax}</span>
+                <span className="total">{subtotal + tax}</span>
               </div>
             </div>
           </div>
@@ -107,12 +109,12 @@ export class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { cart: state.cart };
+  return { cart: state.cart, auth: state.auth };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: () => dispatch(fetchCart()),
+    getCart: (id) => dispatch(fetchCart(id)),
   };
 };
 

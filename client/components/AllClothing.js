@@ -13,6 +13,7 @@ export class AllClothing extends React.Component {
 
   render() {
     let clothing = this.props.clothing;
+    console.log("this is our current props, ", this.props)
     return (
       <div className="all-view">
         <div className="all-view-header">
