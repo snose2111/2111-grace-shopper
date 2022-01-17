@@ -6,10 +6,30 @@ import { addToCart } from "../store/cart";
 export class SingleItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cart: [],
+      quantity: 0,
+      price: 0,
+    };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+
   componentDidMount() {
     this.props.getItem(this.props.match.params.itemID);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.item.id !== this.props.item.id) {
+      this.setState({ quantity: 1, price: this.props.item.price });
+    }
+  }
+
+  handleChange(evt) {
+    this.setState({
+      quantity: Number(evt.target.value),
+      price: this.props.item.price * evt.target.value,
+    });
   }
 
   handleClick(evt) {
@@ -45,6 +65,7 @@ export class SingleItem extends React.Component {
                   min="0"
                   max={item.quantity}
                   defaultValue="1"
+                  onChange={this.handleChange}
                 />
               </div>
               <div className="item-cart">
