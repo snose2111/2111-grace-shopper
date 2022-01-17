@@ -63,7 +63,7 @@ async function seed() {
       quantity: 75,
       color: "Navy",
       rating: 4.32,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236001_1/comme-des-garcons-play-blue-converse-edition-half-heart-chuck-70-sneakers.jpg",
     }),
     Clothing.create({
@@ -74,7 +74,7 @@ async function seed() {
       quantity: 23,
       color: "Grey",
       rating: 4.89,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
     }),
     Clothing.create({
@@ -85,7 +85,7 @@ async function seed() {
       quantity: 23,
       color: "Grey",
       rating: 2.39,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221246M236000_1/comme-des-garcons-play-grey-converse-edition-half-heart-chuck-70-sneakers.jpg",
     }),
   ]);
@@ -151,7 +151,7 @@ async function seed() {
       description: "shirt",
       color: "green",
       quantity: 89,
-      ImageUrl:
+      ImageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
@@ -161,7 +161,7 @@ async function seed() {
       description: "sweatshirt",
       color: "red",
       quantity: 56,
-      ImageUrl:
+      ImageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
@@ -171,7 +171,7 @@ async function seed() {
       description: "tank",
       color: "blue",
       quantity: 90,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
@@ -181,7 +181,7 @@ async function seed() {
       description: "sweater",
       color: "gold",
       quantity: 78,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
@@ -191,7 +191,7 @@ async function seed() {
       description: "jacket",
       color: "white",
       quantity: 67,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
   ]);
@@ -204,7 +204,7 @@ async function seed() {
       description: "flowy skirt",
       color: "yellow",
       quantity: 999,
-      ImageUrl:
+      ImageURL:
         "https://img.ssensemedia.com/images/f_auto,q_auto:best/212771F092000_1/toteme-yellow-raw-trim-skirt.jpg",
     }),
     Clothing.create({
@@ -214,7 +214,7 @@ async function seed() {
       description: "pencil skirt",
       color: "orange",
       quantity: 999,
-      ImageUrl:
+      ImageURL:
         "https://img.ssensemedia.com/images/f_auto,q_auto:best/202387F090217_1/kenzo-orange-straight-miniskirt.jpg",
     }),
     Clothing.create({
@@ -224,7 +224,7 @@ async function seed() {
       description: "tapered pants",
       color: "white",
       quantity: 999,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/f_auto,q_auto:best/212771F087003_1/toteme-white-city-sport-trousers.jpg",
     }),
     Clothing.create({
@@ -234,7 +234,7 @@ async function seed() {
       description: "baggy pants",
       color: "black",
       quantity: 999,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/212704M191021_1/wooyoungmi-black-baggy-carpenter-trousers.jpg",
     }),
     Clothing.create({
@@ -244,7 +244,7 @@ async function seed() {
       description: "long short",
       color: "pink",
       quantity: 999,
-      imageUrl:
+      imageURL:
         "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/211236F088057_1/collina-strada-ssense-exclusive-pink-flower-patch-shorts.jpg",
     }),
   ]);
