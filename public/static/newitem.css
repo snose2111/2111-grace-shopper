@@ -1,0 +1,37 @@
+#create-item-header-text {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 70px;
+  }
+
+  #create-item-field-text {
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgb(0, 0, 0);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  #submit-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: rgb(210, 189, 230);
+    border: 1px solid rgb(225, 210, 240);
+    border-radius: 3px;
+    
+  }
+
+  .create-item-single-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-content: center;
+    justify-content: space-around;
+    padding: 10px;
+    border: 1px dotted rgb(17, 16, 16);
+    background-color: lightcyan;
+    border-radius: 15px;
+    width: 290px;
+  }
