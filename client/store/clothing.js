@@ -4,6 +4,7 @@ import axios from "axios";
 const SET_CLOTHING = "SET_CLOTHING";
 
 // action creator
+
 export const setClothing = (clothing) => {
   return {
     type: SET_CLOTHING,
@@ -12,10 +13,17 @@ export const setClothing = (clothing) => {
 };
 
 // thunk
-export const fetchClothing = () => {
+export const fetchClothing = (category) => {
   return async (dispatch) => {
-    const { data: clothing } = await axios.get("/api/clothing");
-    dispatch(setClothing(clothing));
+    if (category === "all") {
+      const { data: clothing } = await axios.get("/api/clothing");
+      dispatch(setClothing(clothing));
+    } else {
+      const { data: clothingCategory } = await axios.get(
+        `/api/clothing/${category}`
+      );
+      dispatch(setClothing(clothingCategory));
+    }
   };
 };
 
