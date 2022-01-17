@@ -30,7 +30,7 @@ export class AllUsers extends React.Component {
                   <div className="all-view-item-info">
                     <div>
                       <div id="info-row">
-                        <span id="all-view-item-name">{user.username}</span>
+                        <span id="all-view-user-name">{user.username}</span>
                       </div>
                     </div>
 

@@ -8,7 +8,6 @@ import AllClothing from "./components/AllClothing";
 import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
 import AllUsers from "./components/AllUsers";
-
 import Cart from "./components/Cart";
 import { me } from "./store";
 
@@ -41,7 +40,6 @@ class Routes extends Component {
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
-            
           </Switch>
         )}
       </div>
