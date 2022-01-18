@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
+import { Link } from "react-router-dom";
 
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -10,13 +11,11 @@ export class Cart extends React.Component {
     this.state = {
       cart: [],
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async componentDidMount() {
     await this.props.getCart();
-    // console.log("these are our current props in the cart component ", this.props)
-    // console.log("this is the current ID number", this.props.auth)
-
   }
 
   componentDidUpdate(prevProps) {
@@ -25,11 +24,12 @@ export class Cart extends React.Component {
     }
   }
 
+  handleClick(evt) {
+    console.log(evt.target);
+  }
+
   render() {
     const cart = this.state.cart;
-    const insideCart = this.state.cart[0]
-    console.log("this is my cart object", cart)
-    console.log("this is the inside of my cart array ", insideCart)
     return (
       <div className="cart-view">
         <div id="main">
@@ -87,7 +87,11 @@ export class Cart extends React.Component {
             <div id="content">
               <span>Continue to checkout.</span>
               <div id="checkout-button">
-                <button id="checkout">Proceed to Checkout</button>
+                <Link to="/checkout">
+                  <button id="checkout" onClick={this.handleClick}>
+                    Proceed to Checkout
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -98,7 +102,7 @@ export class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { cart: state.cart, };
+  return { cart: state.cart };
 };
 
 const mapDispatch = (dispatch) => {
