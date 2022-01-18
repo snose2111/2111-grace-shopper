@@ -3,6 +3,7 @@
 @import "singleitem-style.css";
 @import "cartview-style.css";
 @import "home.css"
+@import "newitem.css";
 
 .App {
   width: 100vw;

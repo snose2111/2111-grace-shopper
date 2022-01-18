@@ -14,7 +14,8 @@ class NewItem extends React.Component {
            price: "",
            quantity: "",
            color: "",
-           description: ""
+           description: "",
+           imageUrl: "",
           }
 
        this.handleChange = this.handleChange.bind(this);
@@ -31,27 +32,49 @@ class NewItem extends React.Component {
      }
  
    render() {
+       console.log(`the state is${this.state}`)
          return(
-           <div>
-               <form onSubmit={this.handleSubmit}>
-               <h3>Add new item:</h3>
-               <h4>Type:</h4>
-               <input name="type" type="text" value={this.state.type} onChange={this.handleChange} />
-               <h4>Name:</h4>
-               <input name="name" type="text" value={this.state.name} onChange={this.handleChange} />
-               <h4>Price:</h4>
-               <input name="price" type="text" value={this.state.price} onChange={this.handleChange} />
-               <h4>quantity:</h4>
-               <input name="quantity" type="text" value={this.state.quantity} onChange={this.handleChange} />
-               <h4>color:</h4>
-               <input name="color" type="text" value={this.state.color} onChange={this.handleChange} />
-               <h4>description:</h4>
-               <input name="description" type="text" value={this.state.description} onChange={this.handleChange} />
-
+           <div className="all-view">
+               <br/>
+               <br/>
+               <br/>
 
                
+               <form onSubmit={this.handleSubmit}>
+               <div className="all-view-header">    
+                 <span id="create-item-header-text">Add new item</span>
+               </div>
+
+               <div className="create-item-single-card">
+                    <span id="create-item-field-text">Type:  </span>
+                    <input name="type" type="text" value={this.state.type} onChange={this.handleChange} />
+               </div>
+               <div className="create-item-single-card">  
+                    <span id="create-item-field-text">Name:  </span>
+                    <input name="name" type="text" value={this.state.name} onChange={this.handleChange} />
+               </div>
+               <div className="create-item-single-card">  
+                    <span id="create-item-field-text">Price:  </span>
+                    <input name="price" type="text" value={this.state.price} onChange={this.handleChange} />
+               </div>
+               <div className="create-item-single-card">  
+                    <span id="create-item-field-text">Quantity:  </span>
+                    <input name="quantity" type="text" value={this.state.quantity} onChange={this.handleChange} />
+               </div><div className="create-item-single-card">  
+                    <span id="create-item-field-text">Color:  </span>
+                    <input name="color" type="text" value={this.state.color} onChange={this.handleChange} />
+               </div>
+               <div className="create-item-single-card">  
+                    <span id="create-item-field-text">Description:  </span>
+                    <input name="description" type="text" value={this.state.description} onChange={this.handleChange} />
+               </div>
+               <div className="create-item-single-card">  
+                    <span id="create-item-field-text">ImageUrl:  </span>
+                    <input name="imageUrl" type="text" value={this.state.imageUrl} onChange={this.handleChange} />
+               </div>
+                
                <br/>
-               <button type="submit">Submit</button>
+               <button type="submit" id="submit-button">Submit</button>
                </form> 
            </div>
         
