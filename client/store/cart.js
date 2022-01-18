@@ -37,7 +37,7 @@ const dummyCart = [
 // action type
 const SET_CART = "SET_CART";
 const ADD_CART_ITEM = "ADD_CART_ITEM";
-const TOKEN = 'token'
+const TOKEN = "token";
 
 // action creator
 export const setCart = (cart) => {
@@ -65,7 +65,7 @@ export const addToCart = (itemId) => {
   return async (dispatch) => {
     // probably want to fetch item from database by its id
     // then if the user is logged in & everything's authenticated, add it to that user's cart
-    // otherwise just add it to guest cart
+    // otherwise just add it to front-end cart --> get localstorage cart, iterate thru it, if it is already in cart, update quantity, dispatch as new item; else, dispatch new item
     const dummyItem = {
       type: "shirt",
       name: "T-shirt",

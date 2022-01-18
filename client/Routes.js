@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm/AuthForm";
+import Login from "./components/AuthForm/Login";
+import Signup from "./components/AuthForm/Signup";
 import Home from "./components/Home/Home";
 import Homepage from "./components/Homepage";
 import AllClothing from "./components/AllClothing";
@@ -9,13 +10,13 @@ import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
 import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import { me } from "./store";
+import EditItem from "./components/EditItem";
 
 /**
  * COMPONENT
  */
-
-
 
 class Routes extends Component {
   componentDidMount() {
@@ -24,9 +25,10 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { user } = this.props
+    const { user } = this.props;
     return (
       <div id="bottom">
+
         {isLoggedIn ? (
         <Switch>
           <Route exact path="/" component={Homepage} />
@@ -53,6 +55,7 @@ class Routes extends Component {
           <Route path="/users" component={AllUsers} />
           <Route path="/cart/:userId" component={Cart} />
         </Switch>
+
         )}
       </div>
     );
@@ -67,7 +70,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    user: state.auth
+    user: state.auth,
   };
 };
 

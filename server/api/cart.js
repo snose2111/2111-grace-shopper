@@ -28,6 +28,7 @@ router.get("/:userId", requireToken, async (req, res, next) => {
   }
 });
 
+
 router.get("/", async (req, res, next) => {
   try {
       const orders = await Cart.findAll({
