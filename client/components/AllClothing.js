@@ -37,6 +37,7 @@ export class AllClothing extends React.Component {
   }
 
   render() {
+
     let clothing = this.state.clothing;
     return (
       <div className="all-view">

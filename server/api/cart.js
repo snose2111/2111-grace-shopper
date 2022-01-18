@@ -1,43 +1,52 @@
 const router = require("express").Router();
 const {
-  models: { User, Cart, CartItems },
+  models: { User, Cart, Clothing, CartItems },
 } = require("../db");
 module.exports = router;
 
 // this route lists only the items in a specific cart.
-router.get("/:cartId", async (req, res, next) => {
-  try {
-    const clothes = await CartItems.findAll({
-      where: {
-        cartId: req.params.cartId,
-      },
-    });
-
-    res.json(clothes);
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.get("/", async (req, res, next) => {
   try {
-    const user = User.findByToken(req.headers.authorization);
-    if (user) {
-      const cart = await Cart.findAll({
-        where: {
-          userId: user.id,
-          isFulfilled: false,
+    if(req.user){
+    const clothes = await CartItems.findAll({
+      include: [
+        {
+          model: Cart,
+          where: {
+            userId: req.user.id,
+            isFulfilled: false
+          }
         },
-        include: {
-          model: Clothing,
-        },
+        Clothing
+      ]
       });
-      res.json(cart.clothing);
-    }
+
+    res.json(clothes)
+  }
   } catch (err) {
     next(err);
   }
 });
+
+// router.get("/", async (req, res, next) => {
+//   try {
+//     const user = User.findByToken(req.headers.authorization);
+//     if (user) {
+//       const cart = await Cart.findAll({
+//         where: {
+//           userId: user.id,
+//           isFulfilled: false,
+//         },
+//         include: {
+//           model: Clothing,
+//         },
+//       });
+//       res.json(cart.clothing);
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // this should allow a user to get a specific item IN a cart.
 router.get("/:cartId/:clothingId", async (req, res, next) => {
