@@ -10,6 +10,7 @@ import NewItem from "./components/NewItem";
 import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import { me } from "./store";
+import EditItem from "./components/EditItem";
 
 /**
  * COMPONENT
@@ -39,6 +40,8 @@ class Routes extends Component {
           <Route path="/createItem" component={NewItem} />
           <Route path="/users" component={AllUsers} />
           <Route path="/cart" component={Cart} />
+          <Route path="/items/:itemID" component={EditItem} />
+
         </Switch>
         {/* )} */}
       </div>
