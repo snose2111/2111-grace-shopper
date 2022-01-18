@@ -2,51 +2,48 @@ const router = require("express").Router();
 const {
   models: { User, Cart, Clothing, CartItems },
 } = require("../db");
+const { requireToken } = require("./gatekeepingMiddleware")
 module.exports = router;
 
-// this route lists only the items in a specific cart.
-router.get("/", async (req, res, next) => {
+// this route lists only the items in an unfulfilled cart for a specific user.
+router.get("/:userId", requireToken, async (req, res, next) => {
   try {
-    if(req.user){
-    const clothes = await CartItems.findAll({
-      include: [
-        {
-          model: Cart,
-          where: {
-            userId: req.user.id,
-            isFulfilled: false
-          }
-        },
-        Clothing
-      ]
-      });
-
-    res.json(clothes)
+      const cart = await Cart.findOne({
+        where: {
+          userId: req.params.userId,
+          isFulfilled: false
+        }
+      })
+    if(cart) {
+      const clothes = await CartItems.findAll({
+        where: {
+          cartId: cart.id
+        }
+      })
+      res.json(clothes)
+    }
   }
-  } catch (err) {
+  catch (err) {
     next(err);
   }
 });
 
-// router.get("/", async (req, res, next) => {
-//   try {
-//     const user = User.findByToken(req.headers.authorization);
-//     if (user) {
-//       const cart = await Cart.findAll({
-//         where: {
-//           userId: user.id,
-//           isFulfilled: false,
-//         },
-//         include: {
-//           model: Clothing,
-//         },
-//       });
-//       res.json(cart.clothing);
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.get("/", async (req, res, next) => {
+  try {
+      const orders = await Cart.findAll({
+        where: {
+          isFulfilled: true,
+        },
+        include: {
+          model: Clothing,
+        },
+      });
+      res.json(orders);
+    }
+    catch (err) {
+    next(err);
+  }
+});
 
 // this should allow a user to get a specific item IN a cart.
 router.get("/:cartId/:clothingId", async (req, res, next) => {

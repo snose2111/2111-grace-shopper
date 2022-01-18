@@ -22,9 +22,6 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
-  componentDidUpdate(){
-    console.log("this is our user props in the Routes component ", this.props.user)
-  }
   render() {
     const { isLoggedIn } = this.props;
     const { user } = this.props
@@ -41,7 +38,7 @@ class Routes extends Component {
           <Route path="/shop/:category" component={AllClothing} />
           <Route path="/createItem" component={NewItem} />
           <Route path="/users" component={AllUsers} />
-          <Route path="/cart" render={() => <Cart isLoggedIn={isLoggedIn} user={user}/>} />
+          <Route path="/cart/:userId" component={Cart} />
         </Switch>
          ) : (
         <Switch>
@@ -54,7 +51,7 @@ class Routes extends Component {
           <Route path="/shop/:category" component={AllClothing} />
           <Route path="/createItem" component={NewItem} />
           <Route path="/users" component={AllUsers} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart/:userId" component={Cart} />
         </Switch>
         )}
       </div>

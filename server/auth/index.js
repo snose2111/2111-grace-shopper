@@ -26,6 +26,7 @@ router.post('/signup', async (req, res, next) => {
 //can probably use this axios call to verify users to make sure they only have access to their cart, their order history, etc.
 router.get('/me', async (req, res, next) => {
   try {
+    console.log("this is our header in /auth/me ", req.headers.authorization)
     res.send(await User.findByToken(req.headers.authorization))
   } catch (ex) {
     next(ex)
