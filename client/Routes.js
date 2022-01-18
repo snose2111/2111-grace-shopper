@@ -10,6 +10,7 @@ import SingleItem from "./components/SingleItem";
 import NewItem from "./components/NewItem";
 import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import { me } from "./store";
 
 /**
@@ -47,6 +48,7 @@ class Routes extends Component {
               path="/cart"
               render={() => <Cart isLoggedIn={isLoggedIn} user={user} />}
             />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         ) : (
           <Switch>
@@ -60,6 +62,7 @@ class Routes extends Component {
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         )}
       </div>
