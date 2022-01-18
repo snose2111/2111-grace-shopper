@@ -8,10 +8,28 @@ export class AllClothing extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      clothing: [],
+    };
   }
 
   componentDidMount() {
-    this.props.getClothing();
+    this.props.getClothing(this.props.location.pathname.slice(6));
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.clothing.length !== prevProps.clothing.length) {
+      this.setState({ clothing: this.props.clothing });
+    }
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      if (this.props.match.params.category) {
+        await this.props.getClothing(this.props.match.params.category);
+        this.setState({ clothing: this.props.clothing });
+      } else {
+        await this.props.getClothing("all");
+        this.setState({ clothing: this.props.clothing });
+      }
+    }
   }
 
   handleClick(evt) {
@@ -19,7 +37,7 @@ export class AllClothing extends React.Component {
   }
 
   render() {
-    let clothing = this.props.clothing;
+    let clothing = this.state.clothing;
     return (
       <div className="all-view">
         <div className="all-view-header">
@@ -81,7 +99,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getClothing: () => dispatch(fetchClothing()),
+    getClothing: (category) => dispatch(fetchClothing(category)),
     addToCart: (itemId) => dispatch(addToCart(itemId)),
   };
 };
