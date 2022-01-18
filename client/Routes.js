@@ -12,6 +12,7 @@ import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { me } from "./store";
+import EditItem from "./components/EditItem";
 
 /**
  * COMPONENT
@@ -33,6 +34,7 @@ class Routes extends Component {
     const { user } = this.props;
     return (
       <div id="bottom">
+
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/" component={Homepage} />

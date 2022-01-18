@@ -8,6 +8,7 @@ import usersReducer from "./allUsers";
 import createNewItemReducer from "./createNewItem";
 import itemReducer from "./item";
 import cartReducer from "./cart";
+import editItemReducer from "./editItem";
 
 const reducer = combineReducers({
   auth: auth,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   item: itemReducer,
   users: usersReducer,
   newItem: createNewItemReducer,
+  editItem: editItemReducer,
 });
 
 const middleware = composeWithDevTools(
