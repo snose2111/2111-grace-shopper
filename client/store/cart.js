@@ -37,6 +37,7 @@ const dummyCart = [
 // action type
 const SET_CART = "SET_CART";
 const ADD_CART_ITEM = "ADD_CART_ITEM";
+const TOKEN = 'token'
 
 // action creator
 export const setCart = (cart) => {
@@ -59,22 +60,15 @@ export const addCartItem = (item) => {
             // inside cart thunk, get token from local storage
             // when we call the fetchCart thunk inside our component, fetchCart takes in as a parameter auth.id
             // const cart = await axios.get(`api/users/${auth.id}/cart, header authorization token`)
-export const fetchCart = (id) => async dispatch => {
-  const token = window.localStorage.getItem(TOKEN)
-  // if (token) {
-    const res = await axios.get(`/api/users/${id}/cart`, {
-      headers: {
-        authorization: token
-      }
-    })
+export const fetchCart = () => async dispatch => {
+    const res = await axios.get(`/api/cart/`)
     return dispatch(setCart(res.data))
-  }
-// }
-export const fetchCart = () => {
-  return async (dispatch) => {
-    dispatch(setCart(dummyCart));
-  };
-};
+}
+// export const fetchCart = () => {
+//   return async (dispatch) => {
+//     dispatch(setCart(dummyCart));
+//   };
+// };
 
 export const addToCart = (itemId) => {
   return async (dispatch) => {

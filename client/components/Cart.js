@@ -12,8 +12,11 @@ export class Cart extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getCart(this.props.user);
+  async componentDidMount() {
+    await this.props.getCart();
+    // console.log("these are our current props in the cart component ", this.props)
+    // console.log("this is the current ID number", this.props.auth)
+
   }
 
   componentDidUpdate(prevProps) {
@@ -24,10 +27,13 @@ export class Cart extends React.Component {
 
   render() {
     const cart = this.state.cart;
+    const insideCart = this.state.cart[0]
+    console.log("this is my cart object", cart)
+    console.log("this is the inside of my cart array ", insideCart)
     return (
       <div className="cart-view">
         <div id="main">
-          {!cart.length ? (
+          {cart.length < 1 ? (
             <p>Loading cart...</p>
           ) : (
             <div id="left">
@@ -92,12 +98,12 @@ export class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { cart: state.cart, auth: state.auth };
+  return { cart: state.cart, };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: (id) => dispatch(fetchCart(id)),
+    getCart: () => dispatch(fetchCart()),
   };
 };
 

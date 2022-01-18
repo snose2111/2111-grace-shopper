@@ -3,7 +3,9 @@ const { user } = require("pg/lib/defaults");
 const {
   models: { User, Clothing, Cart },
 } = require("../db");
+const {isAdmin} = require("./gatekeepingMiddleware")
 module.exports = router;
+
 
 async function requireToken(req, res, next) {
   try {
@@ -17,7 +19,7 @@ async function requireToken(req, res, next) {
 }
 
 
-router.get("/", async (req, res, next) => {
+router.get("/", isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -70,13 +72,15 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
   try {
     if (req.user.dataValues.id === Number(req.params.userId)) {
       const carts = await Cart.findAll({
-        where: {
-          userId: req.params.userId,
-          isFulfilled: false
-        },
-        include: {
-          model: Clothing,
-        },
+        include: [
+          {
+            model: Cart,
+            where: {
+              userId: req.user.id,
+              isFulfilled: false
+            }
+          },
+        ]
       });
       res.json(carts);
     }
