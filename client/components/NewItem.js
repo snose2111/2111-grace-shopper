@@ -35,11 +35,8 @@ class NewItem extends React.Component {
        console.log(`the state is${this.state}`)
          return(
            <div className="all-view">
-               <br/>
-               <br/>
-               <br/>
-
                
+               <br/>
                <form onSubmit={this.handleSubmit}>
                <div className="all-view-header">    
                  <span id="create-item-header-text">Add new item</span>
