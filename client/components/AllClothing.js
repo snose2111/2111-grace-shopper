@@ -33,7 +33,12 @@ export class AllClothing extends React.Component {
   }
 
   handleClick(evt) {
-    this.props.addToCart(evt.target.value);
+    // this.props.addToCart(evt.target.value);
+    let localCart = JSON.parse(window.localStorage.getItem("cart")
+    if (!localCart) {
+      window.localStorage.setItem("cart", [])
+    }
+    
   }
 
   render() {
