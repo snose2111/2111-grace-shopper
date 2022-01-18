@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
+import { Link } from "react-router-dom";
 
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
@@ -10,10 +11,11 @@ export class Cart extends React.Component {
     this.state = {
       cart: [],
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getCart();
+  async componentDidMount() {
+    await this.props.getCart();
   }
 
   componentDidUpdate(prevProps) {
@@ -22,12 +24,16 @@ export class Cart extends React.Component {
     }
   }
 
+  handleClick(evt) {
+    console.log(evt.target);
+  }
+
   render() {
     const cart = this.state.cart;
     return (
       <div className="cart-view">
         <div id="main">
-          {!cart.length ? (
+          {cart.length < 1 ? (
             <p>Loading cart...</p>
           ) : (
             <div id="left">
@@ -81,7 +87,11 @@ export class Cart extends React.Component {
             <div id="content">
               <span>Continue to checkout.</span>
               <div id="checkout-button">
-                <button id="checkout">Proceed to Checkout</button>
+                <Link to="/checkout">
+                  <button id="checkout" onClick={this.handleClick}>
+                    Proceed to Checkout
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

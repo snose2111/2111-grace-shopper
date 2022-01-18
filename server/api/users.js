@@ -3,9 +3,23 @@ const { user } = require("pg/lib/defaults");
 const {
   models: { User, Clothing, Cart },
 } = require("../db");
+const {isAdmin} = require("./gatekeepingMiddleware")
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+
+async function requireToken(req, res, next) {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    req.user = user;
+    next();
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+router.get("/", isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -53,36 +67,50 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// this should get ALL carts and their items that are associated with a user. whether they are fulfilled or unfulfilled.
-router.get("/:userId/cart", async (req, res, next) => {
+// this should get ALL unfulfilled carts and their items that are associated with a user.
+router.get("/:userId/cart", requireToken, async (req, res, next) => {
   try {
-    const carts = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-      },
-      include: {
-        model: Clothing,
-      },
-    });
-    res.json(carts);
+    if (req.user.dataValues.id === Number(req.params.userId)) {
+      const carts = await Cart.findAll({
+        include: [
+          {
+            model: Cart,
+            where: {
+              userId: req.user.id,
+              isFulfilled: false
+            }
+          },
+        ]
+      });
+      res.json(carts);
+    }
+  else {
+    res.status(404).send("You are not authorized to see this cart!")
+  }
+
   } catch (err) {
     next(err);
   }
 });
 
-// this should get ONLY unfulfilled cart + items
-router.get("/:userId/cart", async (req, res, next) => {
+// this should get ONLY fulfilled cart + items
+router.get("/:userId/orders", requireToken, async (req, res, next) => {
   try {
-    const carts = await Cart.findAll({
-      where: {
-        userId: req.params.userId,
-        isFulfilled: false,
-      },
-      include: {
-        model: Clothing,
-      },
-    });
-    res.json(carts);
+    if (req.user.dataValues.id === Number(req.params.userId)){
+      const carts = await Cart.findAll({
+        where: {
+          userId: req.params.userId,
+          isFulfilled: true,
+        },
+        include: {
+          model: Clothing,
+        },
+      });
+      res.json(carts);
+    }
+    else {
+      res.status(404).send("You are not authorized to see this cart!")
+    }
   } catch (err) {
     next(err);
   }

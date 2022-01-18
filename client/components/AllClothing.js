@@ -8,18 +8,52 @@ export class AllClothing extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      clothing: [],
+    };
   }
 
   componentDidMount() {
-    this.props.getClothing();
+    this.props.getClothing(this.props.location.pathname.slice(6));
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.clothing.length !== prevProps.clothing.length) {
+      this.setState({ clothing: this.props.clothing });
+    }
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      if (this.props.match.params.category) {
+        await this.props.getClothing(this.props.match.params.category);
+        this.setState({ clothing: this.props.clothing });
+      } else {
+        await this.props.getClothing("all");
+        this.setState({ clothing: this.props.clothing });
+      }
+    }
   }
 
   handleClick(evt) {
-    this.props.addToCart(evt.target.value);
+    // this.props.addToCart(evt.target.value);
+    const itemId = evt.target.value;
+    console.log("ITEM ID", itemId);
+    let localCart = JSON.parse(window.localStorage.getItem("cart"));
+    if (!localCart) {
+      const currentItem = this.props.clothing.filter((item) => {
+        console.log("INSIDE FILTER", item.id);
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      window.localStorage.setItem("cart", JSON.stringify(currentItem));
+    } else {
+      const currentItem = this.props.clothing.filter((item) => {
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      localCart.push(JSON.stringify(currentItem));
+      window.localStorage.setItem("cart", JSON.stringify(localCart));
+    }
   }
 
   render() {
-    let clothing = this.props.clothing;
+    let clothing = this.state.clothing;
     return (
       <div className="all-view">
         <div className="all-view-header">
@@ -57,7 +91,7 @@ export class AllClothing extends React.Component {
 
                     <button
                       id="all-view-item-button"
-                      value={item} // want to pass in item Id probably
+                      value={item.id} // want to pass in item Id probably
                       onClick={this.handleClick}
                     >
                       Add to Cart
@@ -81,7 +115,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getClothing: () => dispatch(fetchClothing()),
+    getClothing: (category) => dispatch(fetchClothing(category)),
     addToCart: (itemId) => dispatch(addToCart(itemId)),
   };
 };

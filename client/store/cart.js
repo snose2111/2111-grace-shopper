@@ -37,6 +37,7 @@ const dummyCart = [
 // action type
 const SET_CART = "SET_CART";
 const ADD_CART_ITEM = "ADD_CART_ITEM";
+const TOKEN = "token";
 
 // action creator
 export const setCart = (cart) => {
@@ -54,17 +55,36 @@ export const addCartItem = (item) => {
 };
 
 // thunk
+
+// me function is setting auth on state to the user object
+// pass that auth/user object to the cart component
+// inside cart thunk, get token from local storage
+// when we call the fetchCart thunk inside our component, fetchCart takes in as a parameter auth.id
+// const cart = await axios.get(`api/users/${auth.id}/cart, header authorization token`)
+
+
+// export const fetchCart = () => async dispatch => {
+// if logged in --> {
+//     const res = await axios.get(`/api/users/:userId/cart/`)
+//     return dispatch(setCart(res.data))
+// }
+// else // user not logged in {
+//  return dispatch (setCart([]))
+//}
+// }
+
 export const fetchCart = () => {
   return async (dispatch) => {
     dispatch(setCart(dummyCart));
   };
 };
 
+
 export const addToCart = (itemId) => {
   return async (dispatch) => {
     // probably want to fetch item from database by its id
     // then if the user is logged in & everything's authenticated, add it to that user's cart
-    // otherwise just add it to guest cart
+    // otherwise just add it to front-end cart --> get localstorage cart, iterate thru it, if it is already in cart, update quantity, dispatch as new item; else, dispatch new item
     const dummyItem = {
       type: "shirt",
       name: "T-shirt",
