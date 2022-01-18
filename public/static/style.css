@@ -2,8 +2,9 @@
 @import "color.css";
 @import "singleitem-style.css";
 @import "cartview-style.css";
-@import "home.css"
+@import "home.css";
 @import "newitem.css";
+@import "checkout-style.css";
 
 .App {
   width: 100vw;
@@ -162,7 +163,7 @@ button {
 
 /* homepage styling */
 
-#homepage-items{
+#homepage-items {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -180,7 +181,7 @@ button {
   align-items: center;
   align-content: center;
   padding: 10px;
-  margin: 0 auto
+  margin: 0 auto;
 }
 .categories {
   display: flex;
@@ -199,5 +200,5 @@ button {
   text-align: center;
 }
 .category > img {
-  width: 500px
+  width: 500px;
 }
