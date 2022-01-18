@@ -21,7 +21,7 @@ class EditItem extends React.Component {
     }
 
     componentDidMount() { 
-        this.props.fetchItem(this.props.match.params.itemId);
+        this.props.fetchItem(this.props.match.params.itemID);
       }
     
     handleChange(evt) {
@@ -32,12 +32,12 @@ class EditItem extends React.Component {
   
       handleSubmit(evt) {
         evt.preventDefault();
-        this.props.editItem({ ...this.state, id:this.props.item.id });
+        this.props.editItem({ ...this.state, id:this.props.match.params.itemID });
       }
 
     render() {
           return(
-            <div> <h4>hello</h4>
+            <div> 
               <form onSubmit={this.handleSubmit}>
                <div className="all-view-header">    
                  <span id="create-item-header-text">Edit Item</span>
@@ -85,7 +85,7 @@ const mapState = ( state ) => ({
 const mapDispatch = (dispatch) => {
     return {
         fetchItem: (id) => dispatch(fetchItem(id)),
-        editItem: (campus) => dispatch(editItem(campus))
+        editItem: (item) => dispatch(editItem(item))
         
     };
 };

@@ -9,10 +9,10 @@ export const _editItem = (item) => ({
 
 //THUNK CREATOR
 export const editItem = (item) => {
-  console.log("thunk editItem")
+  console.log("Thunk editItem item.id====>>", item.id)
     return async (dispatch) => {
       try {
-      const { data: updated } = await axios.put(`/api/items/${item.id}`, item);
+      const { data: updated } = await axios.put(`/api/clothing/items/${item.id}`, item);
       dispatch(_editItem(updated));
       } catch (e) {
         console.log('editItem thunk error', e)
