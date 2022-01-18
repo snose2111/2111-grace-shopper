@@ -62,6 +62,7 @@ export const addCartItem = (item) => {
 // when we call the fetchCart thunk inside our component, fetchCart takes in as a parameter auth.id
 // const cart = await axios.get(`api/users/${auth.id}/cart, header authorization token`)
 
+
 // export const fetchCart = () => async dispatch => {
 // if logged in --> {
 //     const res = await axios.get(`/api/users/:userId/cart/`)
@@ -77,6 +78,7 @@ export const fetchCart = () => {
     dispatch(setCart(dummyCart));
   };
 };
+
 
 export const addToCart = (itemId) => {
   return async (dispatch) => {

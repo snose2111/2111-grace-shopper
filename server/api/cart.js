@@ -7,22 +7,24 @@ module.exports = router;
 // this route lists only the items in a specific cart.
 router.get("/", async (req, res, next) => {
   try {
-    if(req.user){
-    const clothes = await CartItems.findAll({
-      include: [
-        {
-          model: Cart,
-          where: {
-            userId: req.user.id,
-            isFulfilled: false
-          }
-        },
-        Clothing
-      ]
+    if (req.body.user.id) {
+      // if(req.user){
+      const clothes = await CartItems.findAll({
+        include: [
+          {
+            model: Cart,
+            where: {
+              userId: req.body.user.id,
+              // userId: req.user.id,
+              isFulfilled: false,
+            },
+          },
+          Clothing,
+        ],
       });
 
-    res.json(clothes)
-  }
+      res.json(clothes);
+    }
   } catch (err) {
     next(err);
   }

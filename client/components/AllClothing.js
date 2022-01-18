@@ -33,7 +33,23 @@ export class AllClothing extends React.Component {
   }
 
   handleClick(evt) {
-    this.props.addToCart(evt.target.value);
+    // this.props.addToCart(evt.target.value);
+    const itemId = evt.target.value;
+    console.log("ITEM ID", itemId);
+    let localCart = JSON.parse(window.localStorage.getItem("cart"));
+    if (!localCart) {
+      const currentItem = this.props.clothing.filter((item) => {
+        console.log("INSIDE FILTER", item.id);
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      window.localStorage.setItem("cart", JSON.stringify(currentItem));
+    } else {
+      const currentItem = this.props.clothing.filter((item) => {
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      localCart.push(JSON.stringify(currentItem));
+      window.localStorage.setItem("cart", JSON.stringify(localCart));
+    }
   }
 
   render() {
