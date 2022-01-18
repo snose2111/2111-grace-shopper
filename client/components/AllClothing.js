@@ -37,7 +37,6 @@ export class AllClothing extends React.Component {
   }
 
   render() {
-
     let clothing = this.state.clothing;
     return (
       <div className="all-view">
@@ -76,7 +75,7 @@ export class AllClothing extends React.Component {
 
                     <button
                       id="all-view-item-button"
-                      value={item} // want to pass in item Id probably
+                      value={item.id} // want to pass in item Id probably
                       onClick={this.handleClick}
                     >
                       Add to Cart
