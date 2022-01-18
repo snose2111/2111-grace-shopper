@@ -14,8 +14,9 @@ export class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  async componentDidMount() {
-    await this.props.getCart();
+  componentDidMount() {
+    this.props.getCart(this.props.match.params.userId);
+    console.log("this is our match params on the cart component ", this.props.match.params.userId)
   }
 
   componentDidUpdate(prevProps) {
@@ -33,7 +34,7 @@ export class Cart extends React.Component {
     return (
       <div className="cart-view">
         <div id="main">
-          {cart.length < 1 ? (
+          {!cart.length ? (
             <p>Loading cart...</p>
           ) : (
             <div id="left">
@@ -107,7 +108,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: () => dispatch(fetchCart()),
+    getCart: (id) => dispatch(fetchCart(id)),
   };
 };
 
