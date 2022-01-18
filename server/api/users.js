@@ -1,12 +1,15 @@
 const router = require("express").Router();
+
+// please remove?
 const { user } = require("pg/lib/defaults");
+
 const {
   models: { User, Clothing, Cart },
 } = require("../db");
-const {isAdmin} = require("./gatekeepingMiddleware")
+const { isAdmin } = require("./gatekeepingMiddleware");
 module.exports = router;
 
-
+// Seems like this same function is defined in gatekeepingmiddleware.js
 async function requireToken(req, res, next) {
   try {
     const token = req.headers.authorization;
@@ -18,7 +21,9 @@ async function requireToken(req, res, next) {
   }
 }
 
-
+// cannot read property 'isAdmin' of undefined.
+// I think you need requireToken somewhere.
+// Are you testing these routes?
 router.get("/", isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -58,9 +63,11 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 // UPDATE a single user.
+// GET for update?
 router.get("/:userId", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
+    // hmmm
     res.json(await user.update(req.body));
   } catch (err) {
     next(err);
@@ -70,6 +77,7 @@ router.get("/:userId", async (req, res, next) => {
 // this should get ALL unfulfilled carts and their items that are associated with a user.
 router.get("/:userId/cart", requireToken, async (req, res, next) => {
   try {
+    // why do you use req.user.id on line 81 and dataValues.id here?
     if (req.user.dataValues.id === Number(req.params.userId)) {
       const carts = await Cart.findAll({
         include: [
@@ -77,17 +85,15 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
             model: Cart,
             where: {
               userId: req.user.id,
-              isFulfilled: false
-            }
+              isFulfilled: false,
+            },
           },
-        ]
+        ],
       });
       res.json(carts);
+    } else {
+      res.status(404).send("You are not authorized to see this cart!");
     }
-  else {
-    res.status(404).send("You are not authorized to see this cart!")
-  }
-
   } catch (err) {
     next(err);
   }
@@ -96,7 +102,7 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
 // this should get ONLY fulfilled cart + items
 router.get("/:userId/orders", requireToken, async (req, res, next) => {
   try {
-    if (req.user.dataValues.id === Number(req.params.userId)){
+    if (req.user.dataValues.id === Number(req.params.userId)) {
       const carts = await Cart.findAll({
         where: {
           userId: req.params.userId,
@@ -107,9 +113,9 @@ router.get("/:userId/orders", requireToken, async (req, res, next) => {
         },
       });
       res.json(carts);
-    }
-    else {
-      res.status(404).send("You are not authorized to see this cart!")
+    } else {
+      // technically this should be a 403
+      res.status(404).send("You are not authorized to see this cart!");
     }
   } catch (err) {
     next(err);

@@ -12,6 +12,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// generally you want to implement a filter as a
+// query string parameter
 router.get("/:clothingType", async (req, res, next) => {
   try {
     const clothing = await Clothing.findAll({
@@ -26,6 +28,7 @@ router.get("/:clothingType", async (req, res, next) => {
 });
 
 // create item
+// i assume this needs to be protected?
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Clothing.create(req.body));
@@ -35,6 +38,8 @@ router.post("/", async (req, res, next) => {
 });
 
 // get individual item
+// why use the 'item' prefix?
+// wouldn't "/:clothingId" be more direct?
 router.get("/item/:clothingId", async (req, res, next) => {
   try {
     console.log(req.params.clothingId);
@@ -46,6 +51,9 @@ router.get("/item/:clothingId", async (req, res, next) => {
 });
 
 // create item
+// seems inconsistent not to use 'item' here
+// and use it elsewhere. Also this is duplicated
+// up above on line 31
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Clothing.create(req.body));

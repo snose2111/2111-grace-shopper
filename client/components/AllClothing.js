@@ -8,15 +8,26 @@ export class AllClothing extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+
+    // why do you need this if you're doing mapStateToProps?
     this.state = {
       clothing: [],
     };
   }
 
   componentDidMount() {
+    // the `slice(6)` is what's known as a 'magic number'.
+    // what is it? What does it mean? What happens if the url
+    // changes in the future? There must be a better way.
     this.props.getClothing(this.props.location.pathname.slice(6));
   }
 
+  // So this is quite hard to read.
+  // nested 'if' statements should be avoided whenever
+  // possible.
+  // it's not clear to me why you are 'awaiting'
+  // this.props.getClothing since you don't ever
+  // read the result.
   async componentDidUpdate(prevProps) {
     if (this.props.clothing.length !== prevProps.clothing.length) {
       this.setState({ clothing: this.props.clothing });
@@ -32,12 +43,28 @@ export class AllClothing extends React.Component {
     }
   }
 
+  // what about this instead? Still not sure about that await
+  // but easier to read
+  async componentDidUpdate({ prevMatch, prevClothing }) {
+    let { getClothing, clothing, match } = this.props;
+    let { category = "all" } = match.params;
+    let newCategory = category !== prevMatch.params.category;
+    let newClothing = clothing.length !== prevClothing.length;
+
+    if (newCategory) {
+      await getClothing(category);
+    }
+    if (newClothing || newCategory) {
+      this.setState({ clothing });
+    }
+  }
+
   handleClick(evt) {
     this.props.addToCart(evt.target.value);
   }
 
   render() {
-
+    // I assume this will be replaced with redux?
     let clothing = this.state.clothing;
     return (
       <div className="all-view">
@@ -95,6 +122,7 @@ export class AllClothing extends React.Component {
 }
 
 const mapState = (state) => {
+  // why is `cart` needed here?
   return { clothing: state.clothing, cart: state.cart };
 };
 

@@ -9,6 +9,10 @@ import createNewItemReducer from "./createNewItem";
 import itemReducer from "./item";
 import cartReducer from "./cart";
 
+// This is a lot of reducers.
+// I'm not sure you need this many.
+// What's the difference between a user and auth?
+// What's the difference between item, new item, and clothing?
 const reducer = combineReducers({
   auth: auth,
   cart: cartReducer,
