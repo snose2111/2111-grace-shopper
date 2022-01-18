@@ -34,15 +34,25 @@ export class AllClothing extends React.Component {
 
   handleClick(evt) {
     // this.props.addToCart(evt.target.value);
-    let localCart = JSON.parse(window.localStorage.getItem("cart")
+    const itemId = evt.target.value;
+    console.log("ITEM ID", itemId);
+    let localCart = JSON.parse(window.localStorage.getItem("cart"));
     if (!localCart) {
-      window.localStorage.setItem("cart", [])
+      const currentItem = this.props.clothing.filter((item) => {
+        console.log("INSIDE FILTER", item.id);
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      window.localStorage.setItem("cart", JSON.stringify(currentItem));
+    } else {
+      const currentItem = this.props.clothing.filter((item) => {
+        return parseInt(itemId) === parseInt(item.id);
+      });
+      localCart.push(JSON.stringify(currentItem));
+      window.localStorage.setItem("cart", JSON.stringify(localCart));
     }
-    
   }
 
   render() {
-
     let clothing = this.state.clothing;
     return (
       <div className="all-view">
@@ -81,7 +91,7 @@ export class AllClothing extends React.Component {
 
                     <button
                       id="all-view-item-button"
-                      value={item} // want to pass in item Id probably
+                      value={item.id} // want to pass in item Id probably
                       onClick={this.handleClick}
                     >
                       Add to Cart

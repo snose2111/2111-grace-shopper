@@ -15,47 +15,51 @@ import { me } from "./store";
  * COMPONENT
  */
 
-
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
 
-  componentDidUpdate(){
-    console.log("this is our user props in the Routes component ", this.props.user)
+  componentDidUpdate() {
+    console.log(
+      "this is our user props in the Routes component ",
+      this.props.user
+    );
   }
   render() {
     const { isLoggedIn } = this.props;
-    const { user } = this.props
+    const { user } = this.props;
     return (
       <div id="bottom">
         {isLoggedIn ? (
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          {/* <Route path="/" exact component={Login} /> */}
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route exact path="/shop/all" component={AllClothing} />
-          <Route exact path="/shop/item/:itemID" component={SingleItem} />
-          <Route path="/shop/:category" component={AllClothing} />
-          <Route path="/createItem" component={NewItem} />
-          <Route path="/users" component={AllUsers} />
-          <Route path="/cart" render={() => <Cart isLoggedIn={isLoggedIn} user={user}/>} />
-        </Switch>
-         ) : (
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          {/* <Route exact path="/shop/all" component={AllClothing} /> */}
-          <Route exact path="/shop/all" component={AllClothing} />
-          <Route exact path="/shop/item/:itemID" component={SingleItem} />
-          <Route path="/shop/:category" component={AllClothing} />
-          <Route path="/createItem" component={NewItem} />
-          <Route path="/users" component={AllUsers} />
-          <Route path="/cart" component={Cart} />
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            {/* <Route path="/" exact component={Login} /> */}
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/shop/all" component={AllClothing} />
+            <Route exact path="/shop/item/:itemID" component={SingleItem} />
+            <Route path="/shop/:category" component={AllClothing} />
+            <Route path="/createItem" component={NewItem} />
+            <Route path="/users" component={AllUsers} />
+            <Route
+              path="/cart"
+              render={() => <Cart isLoggedIn={isLoggedIn} user={user} />}
+            />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            {/* <Route exact path="/shop/all" component={AllClothing} /> */}
+            <Route exact path="/shop/all" component={AllClothing} />
+            <Route exact path="/shop/item/:itemID" component={SingleItem} />
+            <Route path="/shop/:category" component={AllClothing} />
+            <Route path="/createItem" component={NewItem} />
+            <Route path="/users" component={AllUsers} />
+            <Route path="/cart" component={Cart} />
+          </Switch>
         )}
       </div>
     );
@@ -70,7 +74,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    user: state.auth
+    user: state.auth,
   };
 };
 
