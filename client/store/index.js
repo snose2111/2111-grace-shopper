@@ -7,9 +7,11 @@ import clothingReducer from "./clothing";
 import usersReducer from "./allUsers";
 import createNewItemReducer from "./createNewItem";
 import itemReducer from "./item";
+import cartReducer from "./cart";
 
 const reducer = combineReducers({
   auth: auth,
+  cart: cartReducer,
   clothing: clothingReducer,
   item: itemReducer,
   users: usersReducer,

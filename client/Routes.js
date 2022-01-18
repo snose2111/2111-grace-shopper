@@ -23,26 +23,24 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Homepage} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/shop/all" component={AllClothing} />
-            <Route exact path="/shop/item/:itemID" component={SingleItem} />
-            <Route path="/shop/:category" component={AllClothing} />
-            <Route path="/allclothing" component={AllClothing} />
-            <Route path="/createItem" component={NewItem} />
-            <Route path="/users" component={AllUsers} />
-            <Route path="/cart" component={Cart} />
-          </Switch>
-        )}
+      <div id="bottom">
+        {/* {isLoggedIn ? ( */}
+        <Switch>
+          <Route path="/home" component={Homepage} />
+        </Switch>
+        {/* ) : ( */}
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route exact path="/shop/all" component={AllClothing} />
+          <Route exact path="/shop/item/:itemID" component={SingleItem} />
+          <Route path="/shop/:category" component={AllClothing} />
+          <Route path="/createItem" component={NewItem} />
+          <Route path="/users" component={AllUsers} />
+          <Route path="/cart" component={Cart} />
+        </Switch>
+        {/* )} */}
       </div>
     );
   }
