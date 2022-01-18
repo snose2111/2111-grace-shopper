@@ -55,30 +55,11 @@ export const addCartItem = (item) => {
 };
 
 // thunk
-
-// me function is setting auth on state to the user object
-// pass that auth/user object to the cart component
-// inside cart thunk, get token from local storage
-// when we call the fetchCart thunk inside our component, fetchCart takes in as a parameter auth.id
-// const cart = await axios.get(`api/users/${auth.id}/cart, header authorization token`)
-
-
-// export const fetchCart = () => async dispatch => {
-// if logged in --> {
-//     const res = await axios.get(`/api/users/:userId/cart/`)
-//     return dispatch(setCart(res.data))
-// }
-// else // user not logged in {
-//  return dispatch (setCart([]))
-//}
-// }
-
-export const fetchCart = () => {
-  return async (dispatch) => {
-    dispatch(setCart(dummyCart));
-  };
-};
-
+export const fetchCart = (userId) => async dispatch => {
+    let token = window.localStorage.getItem(TOKEN);
+    const res = await axios.get(`/api/cart/${userId}`, {headers: {authorization: token}})
+    return dispatch(setCart(res.data))
+}
 
 export const addToCart = (itemId) => {
   return async (dispatch) => {
