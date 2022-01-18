@@ -35,7 +35,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // get individual item
-router.get("/items/:clothingId", async (req, res, next) => {
+router.get("/item/:clothingId", async (req, res, next) => {
   try {
     console.log(req.params.clothingId);
     const clothing = await Clothing.findByPk(req.params.clothingId);
@@ -55,7 +55,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // update individual item
-router.put("/items/:clothingId", async (req, res, next) => {
+router.put("/item/:clothingId", async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
     res.send(await item.update(req.body));

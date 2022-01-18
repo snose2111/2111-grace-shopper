@@ -40,7 +40,7 @@ class Routes extends Component {
           <Route path="/createItem" component={NewItem} />
           <Route path="/users" component={AllUsers} />
           <Route path="/cart" component={Cart} />
-          <Route path="/items/:itemID" component={EditItem} />
+          <Route path="/item/:itemID" component={EditItem} />
         </Switch>
         {/* )} */}
       </div>
