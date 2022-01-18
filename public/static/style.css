@@ -2,6 +2,7 @@
 @import "color.css";
 @import "singleitem-style.css";
 @import "cartview-style.css";
+@import "home.css"
 
 .App {
   width: 100vw;
@@ -157,13 +158,45 @@ button {
 #all-view-item-button {
   align-items: flex-end;
 }
-/*this is my styling for my homepage component, this should be added to a new file once tenzin makes her pull request*/
-.special-collection {
+
+/* homepage styling */
+
+#homepage-items{
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
+.special-collection {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#special-info {
+  align-items: center;
+  align-content: center;
+  padding: 10px;
+  margin: 0 auto
+}
 .categories {
   display: flex;
   flex-direction: row;
-  flex: 50%;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-evenly;
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.category > img {
+  width: 500px
 }
