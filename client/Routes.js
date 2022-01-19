@@ -12,6 +12,7 @@ import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { me } from "./store";
+import { fetchCart } from "./store/cart";
 import EditItem from "./components/EditItem";
 
 /**
@@ -23,9 +24,17 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+  componentDidUpdate(prevProps) {
+    const prevUser = prevProps.user;
+    const { userId } = this.props;
+
+    if (userId && !prevUser) {
+      this.props.getCart(userId);
+    }
+  }
+
   render() {
     const { isLoggedIn } = this.props;
-    const { user } = this.props;
     return (
       <div id="bottom">
         {isLoggedIn ? (
@@ -70,7 +79,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    user: state.auth,
+    userId: state.auth.id,
   };
 };
 
@@ -78,6 +87,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
+    },
+    getCart(userId) {
+      dispatch(fetchCart(userId));
     },
   };
 };
