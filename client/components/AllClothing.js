@@ -54,28 +54,21 @@ export class AllClothing extends React.Component {
   }
 
   addNewItem(clothingId, type, name, ImageUrl, price) {
-    let token = localStorage.getItem("token");
-    let tokened = token;
-    if (tokened) {
-      console.log("Hello token is here");
-      createOrderThunk(clothingId, price);
+    let items = JSON.parse(localStorage.getItem("cart")) || [];
+    let item = items.find((item) => item.name === name);
+    if (item) {
+      item.count = Number(item.count) + 1;
     } else {
-      var items = JSON.parse(localStorage.getItem("cart")) || [];
-      var item = items.find((item) => item.name === name);
-      if (item) {
-        item.count = Number(item.count) + 1;
-      } else {
-        items.push({
-          clothingId,
-          type,
-          name,
-          ImageUrl,
-          count: 1,
-          price,
-        });
-      }
-      localStorage.setItem("cart", JSON.stringify(items));
+      items.push({
+        clothingId,
+        type,
+        name,
+        ImageUrl,
+        count: 1,
+        price,
+      });
     }
+    localStorage.setItem("cart", JSON.stringify(items));
   }
 
   render() {
@@ -116,16 +109,19 @@ export class AllClothing extends React.Component {
                     </div>
 
                     <button
-                      id="all-view-item-button"
+                      className="add-to-cart"
+                      type="button"
                       value={item.id} // want to pass in item Id probably
-                      onClick={this.handleClick(
-                        item.name,
-                        item.price,
-                        item.imageUrl,
-                        item.type
-                      )}
+                      onClick={() => {
+                        this.addNewItem(
+                          item.name,
+                          item.price,
+                          item.imageUrl,
+                          item.type
+                        );
+                      }}
                     >
-                      Add to Cart
+                      Add to {<Cart />}
                     </button>
                   </div>
                 </div>
