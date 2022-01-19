@@ -11,6 +11,7 @@ export class AllClothing extends React.Component {
     this.state = {
       clothing: [],
     };
+    this.addNewItem = this.addNewItem.bind(this);
   }
 
   componentDidMount() {
@@ -33,23 +34,40 @@ export class AllClothing extends React.Component {
   }
 
   handleClick(evt) {
-    // this.props.addToCart(evt.target.value);
-    const itemId = evt.target.value;
-    console.log("ITEM ID", itemId);
-    let localCart = JSON.parse(window.localStorage.getItem("cart"));
-    if (!localCart) {
-      const currentItem = this.props.clothing.filter((item) => {
-        console.log("INSIDE FILTER", item.id);
-        return parseInt(itemId) === parseInt(item.id);
-      });
-      window.localStorage.setItem("cart", JSON.stringify(currentItem));
+    this.props.addToCart(evt.target.value);
+    // const itemId = evt.target.value;
+    // console.log("ITEM ID", itemId);
+    // let localCart = JSON.parse(window.localStorage.getItem("cart"));
+    // if (!localCart) {
+    //   const currentItem = this.props.clothing.filter((item) => {
+    //     console.log("INSIDE FILTER", item.id);
+    //     return parseInt(itemId) === parseInt(item.id);
+    //   });
+    //   window.localStorage.setItem("cart", JSON.stringify(currentItem));
+    // } else {
+    //   const currentItem = this.props.clothing.filter((item) => {
+    //     return parseInt(itemId) === parseInt(item.id);
+    //   });
+    //   localCart.push(JSON.stringify(currentItem));
+    //   window.localStorage.setItem("cart", JSON.stringify(localCart));
+    // }
+  }
+
+  addNewItem(clothingId, type, name, ImageUrl, price) {
+    let items = JSON.parse(localStorage.getItem("cart")) || [];
+    let item = items.find((item) => item.name === name);
+    if (item) {
+      item.count = Number(item.count) + 1;
     } else {
-      const currentItem = this.props.clothing.filter((item) => {
-        return parseInt(itemId) === parseInt(item.id);
+      items.push({
+        clothingId,
+        type,
+        name,
+        ImageUrl,
+        price,
       });
-      localCart.push(JSON.stringify(currentItem));
-      window.localStorage.setItem("cart", JSON.stringify(localCart));
     }
+    localStorage.setItem("cart", JSON.stringify(items));
   }
 
   render() {
@@ -90,9 +108,18 @@ export class AllClothing extends React.Component {
                     </div>
 
                     <button
-                      id="all-view-item-button"
+                      className="add-to-cart"
+                      type="button"
                       value={item.id} // want to pass in item Id probably
-                      onClick={this.handleClick}
+                      onClick={() => {
+                        this.addNewItem(
+                          item.id,
+                          item.type,
+                          item.name,
+                          item.imageUrl,
+                          item.price
+                        );
+                      }}
                     >
                       Add to Cart
                     </button>
