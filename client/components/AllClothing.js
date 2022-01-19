@@ -11,7 +11,7 @@ export class AllClothing extends React.Component {
     this.state = {
       clothing: [],
     };
-    this.addNewItem = this.bind(this.addNewItem);
+    this.addNewItem = this.addNewItem.bind(this);
   }
 
   componentDidMount() {
@@ -64,7 +64,6 @@ export class AllClothing extends React.Component {
         type,
         name,
         ImageUrl,
-        count: 1,
         price,
       });
     }
@@ -114,14 +113,15 @@ export class AllClothing extends React.Component {
                       value={item.id} // want to pass in item Id probably
                       onClick={() => {
                         this.addNewItem(
+                          item.id,
+                          item.type,
                           item.name,
-                          item.price,
                           item.imageUrl,
-                          item.type
+                          item.price
                         );
                       }}
                     >
-                      Add to {<Cart />}
+                      Add to Cart
                     </button>
                   </div>
                 </div>
