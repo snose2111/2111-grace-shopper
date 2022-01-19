@@ -16,18 +16,22 @@ async function seed() {
     User.create({
       username: "Ataa",
       password: "password",
+      email: "ataa@email.com",
     }),
     User.create({
       username: "Lucy",
       password: "passwordone",
+      email: "lucy@email.com",
     }),
     User.create({
       username: "Elena",
       password: "passwordtwo",
+      email: "elena@email.com",
     }),
     User.create({
       username: "Admin",
       password: "adminone",
+      email: "admin@email.com",
       isAdmin: true,
     }),
   ]);
@@ -75,9 +79,7 @@ async function seed() {
       color: "Grey",
       rating: 4.89,
       imageUrl:
-
         "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221799F127050_1/converse-black-and-white-chuck-taylor-all-star-platform-hi-sneakers.jpg",
-
     }),
     Clothing.create({
       type: "shoes",
@@ -88,9 +90,8 @@ async function seed() {
       color: "Grey",
       rating: 2.39,
       imageUrl:
-
         "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/212799M236174_1/converse-beige-summer-daze-chuck-70-sneakers.jpg",
-   }),
+    }),
   ]);
 
   const accessories = await Promise.all([
@@ -162,7 +163,7 @@ async function seed() {
       color: "green",
       rating: 1.4,
       imageUrl:
-      "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
       type: "tops",
@@ -174,7 +175,6 @@ async function seed() {
       color: "red",
       rating: 1.8,
       imageUrl:
-
         "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
     }),
     Clothing.create({
@@ -224,7 +224,8 @@ async function seed() {
       quantity: 999,
       color: "yellow",
       rating: 3.89,
-      imageUrl: "https://img.ssensemedia.com/images/f_auto,q_auto:best/212771F092000_1/toteme-yellow-raw-trim-skirt.jpg",
+      imageUrl:
+        "https://img.ssensemedia.com/images/f_auto,q_auto:best/212771F092000_1/toteme-yellow-raw-trim-skirt.jpg",
     }),
     Clothing.create({
       type: "bottoms",

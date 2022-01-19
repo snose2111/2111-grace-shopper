@@ -12,7 +12,7 @@ import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { me } from "./store";
-import { fetchCart } from "./store/cart";
+import { fetchCart, setCart } from "./store/cart";
 import EditItem from "./components/EditItem";
 
 /**
@@ -25,12 +25,8 @@ class Routes extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevUser = prevProps.user;
-    const { userId } = this.props;
-
-    if (userId && !prevUser) {
-      this.props.getCart(userId);
-    }
+    if (this.props.userId && !prevProps.userId)
+      this.props.getCart(this.props.userId);
   }
 
   render() {
@@ -48,7 +44,7 @@ class Routes extends Component {
             <Route path="/shop/:category" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
-            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
           </Switch>
         ) : (
@@ -62,7 +58,7 @@ class Routes extends Component {
             <Route path="/shop/:category" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
-            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
           </Switch>
         )}

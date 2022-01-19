@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchClothing } from "../store/clothing";
-import { addToCart } from "../store/cart";
+import { fetchCart, addToCart } from "../store/cart";
 import { Link } from "react-router-dom";
 
 export class AllClothing extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.state = {
       clothing: [],
     };
@@ -29,26 +29,6 @@ export class AllClothing extends React.Component {
         await this.props.getClothing("all");
         this.setState({ clothing: this.props.clothing });
       }
-    }
-  }
-
-  handleClick(evt) {
-    // this.props.addToCart(evt.target.value);
-    const itemId = evt.target.value;
-    console.log("ITEM ID", itemId);
-    let localCart = JSON.parse(window.localStorage.getItem("cart"));
-    if (!localCart) {
-      const currentItem = this.props.clothing.filter((item) => {
-        console.log("INSIDE FILTER", item.id);
-        return parseInt(itemId) === parseInt(item.id);
-      });
-      window.localStorage.setItem("cart", JSON.stringify(currentItem));
-    } else {
-      const currentItem = this.props.clothing.filter((item) => {
-        return parseInt(itemId) === parseInt(item.id);
-      });
-      localCart.push(JSON.stringify(currentItem));
-      window.localStorage.setItem("cart", JSON.stringify(localCart));
     }
   }
 
@@ -91,8 +71,14 @@ export class AllClothing extends React.Component {
 
                     <button
                       id="all-view-item-button"
-                      value={item.id} // want to pass in item Id probably
-                      onClick={this.handleClick}
+                      value={item.id}
+                      onClick={() =>
+                        this.props.addToCart(this.props.userId, {
+                          id: item.id,
+                          price: item.price,
+                          quantity: 1,
+                        })
+                      }
                     >
                       Add to Cart
                     </button>
@@ -110,13 +96,14 @@ export class AllClothing extends React.Component {
 }
 
 const mapState = (state) => {
-  return { clothing: state.clothing, cart: state.cart };
+  return { clothing: state.clothing, userId: state.auth.id };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getClothing: (category) => dispatch(fetchClothing(category)),
-    addToCart: (itemId) => dispatch(addToCart(itemId)),
+    getCart: (userId) => dispatch(fetchCart(userId)),
+    addToCart: (userId, itemId) => dispatch(addToCart(userId, itemId)),
   };
 };
 
