@@ -56,6 +56,7 @@ export class AllClothing extends React.Component {
     let clothing = this.state.clothing;
     return (
       <div className="all-view">
+        <Link to="/createItem"><h4>Add Item</h4></Link>
         <div className="all-view-header">
           <span id="all-view-header-text">Shop All Clothing</span>
           <div className="all-view-header-buttons">
@@ -69,6 +70,11 @@ export class AllClothing extends React.Component {
             clothing.map((item) => {
               return (
                 <div key={item.id} className="all-view-single-card">
+                  <button
+                            type="submit" onClick = {() => {                      
+                            this.props.deleteItem(item.id);
+                            }}> X
+                          </button>
                   <div className="all-view-img">
                     <Link to={`/shop/item/${item.id}`}>
                       <img src={item.imageUrl} width="200px" />
