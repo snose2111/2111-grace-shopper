@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
+import { fetchCart, deleteFromCart } from "../store/cart";
 import { Link } from "react-router-dom";
 
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
@@ -14,19 +14,22 @@ export class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getCart(this.props.match.params.userId);
-    console.log("this is our match params on the cart component ", this.props.match.params.userId)
-  }
+  async componentDidUpdate(prevProps) {
+    const { userId, cart } = this.props;
 
-  componentDidUpdate(prevProps) {
-    if (this.props.cart.length !== prevProps.cart.length) {
+    if (userId !== prevProps.userId) {
+      await this.props.getCart(this.props.userId);
+    }
+
+    if (cart.length !== prevProps.cart.length) {
       this.setState({ cart: this.props.cart });
     }
   }
 
   handleClick(evt) {
-    console.log(evt.target);
+    const cartId = this.state.cart[0].cartId;
+    console.log(evt.target.value);
+    this.props.deleteItem(cartId, evt.target.value);
   }
 
   render() {
@@ -61,7 +64,13 @@ export class Cart extends React.Component {
                   </div>
                   <div id="right">
                     <span>${item.price} USD</span>
-                    <button id="remove-button">Remove</button>
+                    <button
+                      id="remove-button"
+                      value={item.clothingId}
+                      onClick={this.handleClick}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               ))}
@@ -103,12 +112,13 @@ export class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { cart: state.cart };
+  return { cart: state.cart, userId: state.auth.id };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getCart: (id) => dispatch(fetchCart(id)),
+    deleteItem: (cartId, itemId) => dispatch(deleteFromCart(cartId, itemId)),
   };
 };
 

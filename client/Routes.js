@@ -12,6 +12,7 @@ import AllUsers from "./components/AllUsers";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { me } from "./store";
+import { fetchCart, setCart } from "./store/cart";
 import EditItem from "./components/EditItem";
 
 /**
@@ -23,10 +24,14 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.userId && !prevProps.userId)
+      this.props.getCart(this.props.userId);
+  }
+
   render() {
     const { isLoggedIn } = this.props;
-    const { user } = this.props;
-    console.log(user);
+    
     return (
       <div id="bottom">
         {isLoggedIn ? (
@@ -40,7 +45,7 @@ class Routes extends Component {
             <Route path="/shop/:category" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
-            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/item/:itemID" component={EditItem} />
           </Switch>
@@ -55,7 +60,7 @@ class Routes extends Component {
             <Route path="/shop/:category" component={AllClothing} />
             <Route path="/createItem" component={NewItem} />
             <Route path="/users" component={AllUsers} />
-            <Route path="/cart/:userId" component={Cart} />
+            <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/item/:itemID" component={EditItem} />
           </Switch>
@@ -73,7 +78,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-    user: state.auth,
+    userId: state.auth.id,
   };
 };
 
@@ -81,6 +86,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
+    },
+    getCart(userId) {
+      dispatch(fetchCart(userId));
     },
   };
 };
