@@ -63,7 +63,7 @@ User.findByToken = async function (token) {
     const { id } = await jwt.verify(token, process.env.JWT);
     console.log("this is our id from out token ", typeof id);
     const user = await User.findByPk(id);
-    console.log("this is our user in findByToken ", user);
+    //console.log("this is our user in findByToken ", user);
     if (!user) {
       throw "nooo";
     }
