@@ -32,7 +32,7 @@ class EditItem extends React.Component {
   
       handleSubmit(evt) {
         evt.preventDefault();
-        this.props.editItem({ ...this.state, id:this.props.match.params.itemID });
+        this.props.editItem({ ...this.state, id:this.props.match.params.itemID, history: this.props.history });
       }
 
     render() {

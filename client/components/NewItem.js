@@ -28,15 +28,16 @@ class NewItem extends React.Component {
      }
       handleSubmit(evt) {
        evt.preventDefault();
-       this.props.createNewItem({ ...this.state });
+       
+      let history = this.props.history;
+      console.log("history from NewItem--------------->",history)
+       this.props.createNewItem({ ...this.state }, history );
      }
  
    render() {
        console.log(`the state is${this.state}`)
          return(
            <div className="all-view">
-               
-               <br/>
                <form onSubmit={this.handleSubmit}>
                <div className="all-view-header">    
                  <span id="create-item-header-text">Add new item</span>
@@ -81,7 +82,7 @@ class NewItem extends React.Component {
  
 const mapDispatch = (dispatch) => {
    return {
-       createNewItem: (item) => dispatch(createNewItem(item))
+       createNewItem: (item, history) => dispatch(createNewItem(item, history))
    };
 };
  

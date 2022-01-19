@@ -18,6 +18,7 @@ export const editItem = (item) => {
       try {
       const { data: updated } = await axios.put(`/api/clothing/item/${item.id}`, item);
       dispatch(_editItem(updated));
+      item.history.push("/shop/all");
       } catch (e) {
         console.log('editItem thunk error', e)
       }

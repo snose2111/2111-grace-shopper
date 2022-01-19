@@ -63,7 +63,7 @@ export class AllClothing extends React.Component {
     return (
       <div className="all-view">{auth.isAdmin ? (
         <div>
-      <Link to="/createItem"><h4>Add Item</h4></Link>
+      <Link to="/createItem"><button>Add New Item</button></Link>
         </div>
       ) : (<div></div>
       )}
@@ -83,7 +83,7 @@ export class AllClothing extends React.Component {
                 <div key={item.id} className="all-view-single-card">
                   {auth.isAdmin ? (
                     <div>
-                  <Link to={`/item/${item.id}`}><h6>Edit Item</h6></Link>
+                  <Link to={`/item/${item.id}`}><button>Edit Item</button></Link>
                   <button
                             type="submit" onClick = {() => {                      
                             this.props.deleteItem(item.id);
