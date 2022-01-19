@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchClothing } from "../store/clothing";
+import { fetchClothing, deleteItem } from "../store/clothing";
 import { addToCart } from "../store/cart";
 import { Link } from "react-router-dom";
+
 
 export class AllClothing extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class AllClothing extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       clothing: [],
+      
     };
     this.addNewItem = this.addNewItem.bind(this);
   }
@@ -19,6 +21,7 @@ export class AllClothing extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
+    
     if (this.props.clothing.length !== prevProps.clothing.length) {
       this.setState({ clothing: this.props.clothing });
     }
@@ -72,8 +75,17 @@ export class AllClothing extends React.Component {
 
   render() {
     let clothing = this.state.clothing;
+    let auth = this.props.auth;
+    console.log("this state ===>",this.state)
+    
     return (
-      <div className="all-view">
+      <div className="all-view">{auth.isAdmin ? (
+        <div>
+      <Link to="/createItem"><button>Add New Item</button></Link>
+        </div>
+      ) : (<div></div>
+      )}
+        
         <div className="all-view-header">
           <span id="all-view-header-text">Shop All Clothing</span>
           <div className="all-view-header-buttons">
@@ -87,6 +99,17 @@ export class AllClothing extends React.Component {
             clothing.map((item) => {
               return (
                 <div key={item.id} className="all-view-single-card">
+                  {auth.isAdmin ? (
+                    <div>
+                  <Link to={`/item/${item.id}`}><button>Edit Item </button> </Link> 
+                  <button
+                            type="submit" onClick = {() => {                      
+                            this.props.deleteItem(item.id);
+                            }}> X
+                  </button> 
+                    </div>
+                  ) : (<div></div>
+                  )}
                   <div className="all-view-img">
                     <Link to={`/shop/item/${item.id}`}>
                       <img src={item.imageUrl} width="200px" />
@@ -137,13 +160,14 @@ export class AllClothing extends React.Component {
 }
 
 const mapState = (state) => {
-  return { clothing: state.clothing, cart: state.cart };
+  return { clothing: state.clothing, cart: state.cart, auth: state.auth };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getClothing: (category) => dispatch(fetchClothing(category)),
     addToCart: (itemId) => dispatch(addToCart(itemId)),
+    deleteItem: (itemId) => dispatch(deleteItem(itemId)),
   };
 };
 
