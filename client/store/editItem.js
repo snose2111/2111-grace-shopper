@@ -12,13 +12,13 @@ export const _editItem = (item) => ({
 
 //THUNK CREATOR
 
-export const editItem = (item) => {
+export const editItem = (item, history) => {
   console.log("Thunk editItem item.id====>>", item.id)
     return async (dispatch) => {
       try {
       const { data: updated } = await axios.put(`/api/clothing/item/${item.id}`, item);
       dispatch(_editItem(updated));
-      item.history.push("/shop/all");
+      history.push("/shop/all");
       } catch (e) {
         console.log('editItem thunk error', e)
       }

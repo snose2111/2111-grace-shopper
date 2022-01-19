@@ -83,7 +83,7 @@ export class AllClothing extends React.Component {
                 <div key={item.id} className="all-view-single-card">
                   {auth.isAdmin ? (
                     <div>
-                  <Link to={`/item/${item.id}`}><button>Edit Item</button></Link>
+                  <Link to={`/item/${item.id}`}><button>Edit Item </button> </Link> 
                   <button
                             type="submit" onClick = {() => {                      
                             this.props.deleteItem(item.id);

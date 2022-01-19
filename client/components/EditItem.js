@@ -32,7 +32,7 @@ class EditItem extends React.Component {
   
       handleSubmit(evt) {
         evt.preventDefault();
-        this.props.editItem({ ...this.state, id:this.props.match.params.itemID, history: this.props.history });
+        this.props.editItem({ ...this.state, id:this.props.match.params.itemID }, this.props.history);
       }
 
     render() {
@@ -85,7 +85,7 @@ const mapState = ( state ) => ({
 const mapDispatch = (dispatch) => {
     return {
         fetchItem: (id) => dispatch(fetchItem(id)),
-        editItem: (item) => dispatch(editItem(item))
+        editItem: (item, history) => dispatch(editItem(item, history))
         
     };
 };
