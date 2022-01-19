@@ -5,6 +5,7 @@
 @import "home.css";
 @import "newitem.css";
 @import "checkout-style.css";
+@import "forms.css";
 
 .App {
   width: 100vw;
@@ -75,6 +76,10 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.error {
+  color: red;
 }
 
 #special-button {

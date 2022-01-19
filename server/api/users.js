@@ -3,9 +3,8 @@ const { user } = require("pg/lib/defaults");
 const {
   models: { User, Clothing, Cart },
 } = require("../db");
-const {isAdmin} = require("./gatekeepingMiddleware")
+const { isAdmin } = require("./gatekeepingMiddleware");
 module.exports = router;
-
 
 async function requireToken(req, res, next) {
   try {
@@ -17,7 +16,6 @@ async function requireToken(req, res, next) {
     next(err);
   }
 }
-
 
 router.get("/", isAdmin, async (req, res, next) => {
   try {
@@ -35,12 +33,15 @@ router.get("/", isAdmin, async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.create({ username, password });
+    const user = await User.create(req.body);
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
-      res.status(401).send("User already exists");
+      res
+        .status(401)
+        .send(
+          "A user with that username or email address already exists. Please try again"
+        );
     } else {
       next(err);
     }
@@ -77,17 +78,15 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
             model: Cart,
             where: {
               userId: req.user.id,
-              isFulfilled: false
-            }
+              isFulfilled: false,
+            },
           },
-        ]
+        ],
       });
       res.json(carts);
+    } else {
+      res.status(404).send("You are not authorized to see this cart!");
     }
-  else {
-    res.status(404).send("You are not authorized to see this cart!")
-  }
-
   } catch (err) {
     next(err);
   }
@@ -96,7 +95,7 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
 // this should get ONLY fulfilled cart + items
 router.get("/:userId/orders", requireToken, async (req, res, next) => {
   try {
-    if (req.user.dataValues.id === Number(req.params.userId)){
+    if (req.user.dataValues.id === Number(req.params.userId)) {
       const carts = await Cart.findAll({
         where: {
           userId: req.params.userId,
@@ -107,9 +106,8 @@ router.get("/:userId/orders", requireToken, async (req, res, next) => {
         },
       });
       res.json(carts);
-    }
-    else {
-      res.status(404).send("You are not authorized to see this cart!")
+    } else {
+      res.status(404).send("You are not authorized to see this cart!");
     }
   } catch (err) {
     next(err);

@@ -11,14 +11,22 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
+    validate: { notEmpty: true },
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: { notEmpty: true },
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+    validate: { notEmpty: true },
   },
   firstName: { type: Sequelize.STRING },
   lastName: { type: Sequelize.STRING },
   address: { type: Sequelize.STRING },
-  email: { type: Sequelize.STRING },
   creditCard: { type: Sequelize.INTEGER },
   isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
 });
@@ -53,9 +61,9 @@ User.authenticate = async function ({ username, password }) {
 User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    console.log("this is our id from out token ", typeof id)
+    console.log("this is our id from out token ", typeof id);
     const user = await User.findByPk(id);
-    console.log("this is our user in findByToken ", user)
+    console.log("this is our user in findByToken ", user);
     if (!user) {
       throw "nooo";
     }
