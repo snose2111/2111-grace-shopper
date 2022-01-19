@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchClothing } from "../store/clothing";
 import { addToCart } from "../store/cart";
 import { Link } from "react-router-dom";
+import { deleteItem } from "../store/editItem"
 
 export class AllClothing extends React.Component {
   constructor(props) {
@@ -123,6 +124,7 @@ const mapDispatch = (dispatch) => {
   return {
     getClothing: (category) => dispatch(fetchClothing(category)),
     addToCart: (itemId) => dispatch(addToCart(itemId)),
+    deleteItem: (itemId) => dispatch(deleteItem(itemId)),
   };
 };
 

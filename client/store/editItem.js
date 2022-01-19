@@ -1,5 +1,6 @@
 import axios from 'axios';
 const EDIT_ITEM = 'EDIT_ITEM';
+const DELETE_ITEM = 'DELETE_ITEM';
 
 //ACTION CREATORS
 export const _editItem = (item) => ({
@@ -7,7 +8,13 @@ export const _editItem = (item) => ({
     item
   });
 
+  export const _deleteItem = (item) => ({
+    type: DELETE_ITEM,
+    item
+  });
+
 //THUNK CREATOR
+
 export const editItem = (item) => {
   console.log("Thunk editItem item.id====>>", item.id)
     return async (dispatch) => {
@@ -20,6 +27,17 @@ export const editItem = (item) => {
     };
   };
 
+  export const deleteItem = (id) => {
+    return async (dispatch) => {
+      try {
+      const {data: item} = await axios.delete(`/api/clothing/item/${id}`);
+      dispatch(_deleteItem(item));
+      } catch (e) {
+        console.log('deleteItem thunk error', e)
+      }
+    };
+  };
+
 //REDUCER
 export default function editItemReducer(state = [], action) {
   switch (action.type) {
@@ -27,6 +45,9 @@ export default function editItemReducer(state = [], action) {
       console.log("reducer editItem")
       return state.map((item) =>
         (item.id === action.item.id ? action.item : item));
+        case DELETE_ITEM:
+          console.log("reducer deleteItem")
+          return state.filter((item) => item.id !== action.item.id);  
       default:
         return state;
   }
