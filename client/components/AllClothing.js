@@ -67,6 +67,7 @@ export class AllClothing extends React.Component {
         type,
         name,
         ImageUrl,
+        count: 1,
         price,
       });
     }
@@ -133,7 +134,6 @@ export class AllClothing extends React.Component {
                     <button
                       className="add-to-cart"
                       type="button"
-                      value={item.id} // want to pass in item Id probably
                       onClick={() => {
                         this.addNewItem(
                           item.id,
