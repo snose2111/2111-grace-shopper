@@ -16,22 +16,22 @@ async function seed() {
     User.create({
       username: "Ataa",
       password: "password",
-      email: "ataa@email.com",
+      email: "ejj@gmail.com"
     }),
     User.create({
       username: "Lucy",
       password: "passwordone",
-      email: "lucy@email.com",
+      email: "elk@gmail.com"
     }),
     User.create({
       username: "Elena",
       password: "passwordtwo",
-      email: "elena@email.com",
+      email: "ely@gmail.com"
     }),
     User.create({
       username: "Admin",
       password: "adminone",
-      email: "admin@email.com",
+      email: "elw@gmail.com",
       isAdmin: true,
     }),
   ]);

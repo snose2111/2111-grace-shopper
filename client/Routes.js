@@ -31,6 +31,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
+    
     return (
       <div id="bottom">
         {isLoggedIn ? (
@@ -46,6 +47,7 @@ class Routes extends Component {
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/item/:itemID" component={EditItem} />
           </Switch>
         ) : (
           <Switch>
@@ -60,6 +62,7 @@ class Routes extends Component {
             <Route path="/users" component={AllUsers} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/item/:itemID" component={EditItem} />
           </Switch>
         )}
       </div>
