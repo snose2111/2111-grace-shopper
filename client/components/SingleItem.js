@@ -7,7 +7,6 @@ export class SingleItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: [],
       quantity: 0,
       price: 0,
     };
@@ -33,7 +32,12 @@ export class SingleItem extends React.Component {
   }
 
   handleClick(evt) {
-    this.props.addToCart(evt.target.value);
+    const itemId = evt.target.value;
+    this.props.addToCart(this.props.userId, {
+      id: itemId,
+      price: this.state.price,
+      quantity: this.state.quantity,
+    });
   }
 
   render() {
@@ -86,13 +90,13 @@ export class SingleItem extends React.Component {
 }
 
 const mapState = (state) => {
-  return { item: state.item, cart: state.cart };
+  return { item: state.item, userId: state.auth.id };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getItem: (itemId) => dispatch(fetchItem(itemId)),
-    addToCart: (itemId) => dispatch(addToCart(itemId)),
+    addToCart: (userId, itemId) => dispatch(addToCart(userId, itemId)),
   };
 };
 
