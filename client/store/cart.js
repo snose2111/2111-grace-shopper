@@ -64,7 +64,7 @@ export default function cartReducer(state = [], action) {
       );
       if (doesExist.length) {
         return state.map((item) =>
-          item.clothingIdd === action.item.clothingId ? action.item : item
+          item.clothingId === action.item.clothingId ? action.item : item
         );
       } else {
         return [...state, action.item];

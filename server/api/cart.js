@@ -93,7 +93,10 @@ router.post("/:userId/:clothingId", async (req, res, next) => {
         }
       );
     }
-    const clothingItem = await Clothing.findByPk(req.params.clothingId);
+    const clothingItem = await Clothing.findByPk(req.params.clothingId, {
+      include: { model: Cart },
+      where: { id: existingCart.id },
+    });
     res.status(201).json(clothingItem);
   } catch (err) {
     next(err);
