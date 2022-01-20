@@ -23,25 +23,25 @@ export class Homepage extends React.Component {
 
           <div className="categories">
             <div className="category">
-              <Link to={"/shop/all/tops"}>
+              <Link to={"/shop/tops"}>
               <img src="https://i.imgur.com/t7IFVXS.png"/>
                 <h4>Tops</h4>
               </Link>
             </div>
             <div className="category">
-            <Link to={"/shop/all/bottoms"}>
+            <Link to={"/shop/bottoms"}>
               <img src="https://i.imgur.com/t7IFVXS.png"/>
               <h4>Bottoms</h4>
             </Link>
             </div>
             <div className="category">
-            <Link to={"/shop/all/shoes"}>
+            <Link to={"/shop/shoes"}>
               <img src="https://i.imgur.com/t7IFVXS.png"/>
               <h4>Shoes</h4>
             </Link>
             </div>
             <div className="category">
-            <Link to={"/shop/all/accessories"}>
+            <Link to={"/shop/accessories"}>
               <img src="https://i.imgur.com/t7IFVXS.png"/>
               <h4>Accessories</h4>
             </Link>
