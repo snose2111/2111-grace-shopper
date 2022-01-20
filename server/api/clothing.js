@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Clothing },
 } = require("../db");
+const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -26,7 +27,7 @@ router.get("/:clothingType", async (req, res, next) => {
 });
 
 // create item
-router.post("/", async (req, res, next) => {
+router.post("/", requireToken, isAdmin, async (req, res, next) => {
   try {
     res.status(201).send(await Clothing.create(req.body));
   } catch (err) {
@@ -66,7 +67,7 @@ router.put("/item/:clothingId", async (req, res, next) => {
 });
 
 // delete item
-router.delete("/item/:clothingId", async (req, res, next) => {
+router.delete("/item/:clothingId", requireToken, isAdmin, async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
     await item.destroy();

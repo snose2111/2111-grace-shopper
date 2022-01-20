@@ -38,7 +38,7 @@ export class Cart extends React.Component {
       <div className="cart-view">
         <div id="main">
           {!cart.length ? (
-            <p>Loading cart...</p>
+            <p>Your cart is empty!</p>
           ) : (
             <div id="left">
               <div id="header">Shopping Bag</div>
