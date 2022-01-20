@@ -56,14 +56,14 @@ export class Cart extends React.Component {
                           type="number"
                           min="0"
                           max={item.quantity}
-                          defaultValue="1"
+                          defaultValue={item.carts[0].cart_item.quantity}
                         />
                         <button id="update-qty">Update</button>
                       </div>
                     </div>
                   </div>
                   <div id="right">
-                    <span>${item.price} USD</span>
+                    <span>${item.carts[0].cart_item.price} USD</span>
                     <button
                       id="remove-button"
                       value={item.clothingId}

@@ -32,7 +32,10 @@ router.get("/:userId", async (req, res, next) => {
     //if it exists, load all the clothes associated with the cart.
     if (cart) {
       const clothes = await Clothing.findAll({
-        include: { model: Cart, where: { id: cart.id } },
+        include: {
+          model: Cart,
+          where: { id: cart.id },
+        },
       });
       res.json(clothes);
     } else {
@@ -90,7 +93,8 @@ router.post("/:userId/:clothingId", async (req, res, next) => {
         }
       );
     }
-    res.status(201).json(clothes);
+    const clothingItem = await Clothing.findByPk(req.params.clothingId);
+    res.status(201).json(clothingItem);
   } catch (err) {
     next(err);
   }
