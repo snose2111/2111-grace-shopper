@@ -12,6 +12,7 @@ export class Cart extends React.Component {
       cart: [],
     };
     this.handleClick = this.handleClick.bind(this);
+    this.calcTotal = this.calcTotal.bind(this);
   }
 
   async componentDidUpdate(prevProps) {
@@ -30,6 +31,15 @@ export class Cart extends React.Component {
     const cartId = this.state.cart[0].cartId;
     console.log(evt.target.value);
     this.props.deleteItem(cartId, evt.target.value);
+  }
+
+  calcTotal() {
+    let clothing = this.state.cart;
+    let total = 0;
+    for (let i = 0; i < clothing.length; i++) {
+      total += Number(clothing[i].carts[0].cart_item.price);
+    }
+    return total;
   }
 
   render() {
@@ -78,16 +88,13 @@ export class Cart extends React.Component {
                 <div id="left">
                   <span>Total</span>
                   <span>Shipping Estimate</span>
-                  <span>Tax</span>
                   <span className="total">Order Total</span>
                 </div>
                 <div id="right">
-                  <span>${cart.map((item) => item.price).reduce(reducer)}</span>
+                  <span>${this.calcTotal()}.00</span>
                   <span>Calculated at checkout</span>
-                  <span>
-                    ${cart.map((item) => item.price).reduce(reducer) * 0.08875}
-                  </span>
-                  <span className="total">$Total here</span>
+
+                  <span className="total">${this.calcTotal()}.00</span>
                 </div>
               </div>
             </div>
