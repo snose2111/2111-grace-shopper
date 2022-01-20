@@ -31,17 +31,18 @@ router.get("/:userId", async (req, res, next) => {
     });
     //if it exists, load all the clothes associated with the cart.
     if (cart) {
-      const clothes = await CartItems.findAll({
-        where: {
-          cartId: cart.id,
-        },
+      const clothes = await Clothing.findAll({
+        include: { model: Cart, where: { id: cart.id } },
       });
       res.json(clothes);
     } else {
       // if cart does not exist, we create one
       const user = await User.findByPk(req.params.userId);
       const newCart = await user.createCart();
-      console.log(newCart);
+      const clothes = await Clothing.findAll({
+        include: { model: Cart, where: { id: newCart.id } },
+      });
+      res.json(clothes);
     }
   } catch (err) {
     next(err);

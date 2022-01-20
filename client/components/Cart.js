@@ -45,7 +45,7 @@ export class Cart extends React.Component {
               {cart.map((item) => (
                 <div key={item.id} id="cart-item">
                   <div id="left">
-                    <img id="cart-img" src={item.ImageURL} />
+                    <img id="cart-img" src={item.imageUrl} />
                     <div id="inner-cart-item">
                       <span id="item-name">{item.name}</span>
                       <span>{item.description}</span>
