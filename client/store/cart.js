@@ -4,6 +4,7 @@ import { DELETE } from "sequelize/dist/lib/query-types";
 // action type
 const SET_CART = "SET_CART";
 const ADD_CART_ITEM = "ADD_CART_ITEM";
+const ADD_LOCAL_CART_ITEM = "ADD_LOCAL_CART_ITEM";
 const DELETE_CART_ITEM = "DELETE_CART_ITEM";
 
 const TOKEN = "token";
@@ -19,6 +20,13 @@ export const setCart = (cart) => {
 export const addCartItem = (item) => {
   return {
     type: ADD_CART_ITEM,
+    item,
+  };
+};
+
+export const addLocalCartItem = (item) => {
+  return {
+    type: ADD_LOCAL_CART_ITEM,
     item,
   };
 };
@@ -41,9 +49,28 @@ export const fetchCart = (userId) => async (dispatch) => {
 
 export const addToCart = (userId, item) => {
   return async (dispatch) => {
-    const res = await axios.post(`/api/cart/${userId}/${item.id}`, item);
-    dispatch(addCartItem(res.data));
+    if (userId) {
+      const res = await axios.post(`/api/cart/${userId}/${item.id}`, item);
+      dispatch(addCartItem(res.data));
+    } else {
+      dispatch(addLocalCartItem(addNewItem(item)));
+    }
   };
+};
+
+const addNewItem = (item) => {
+  console.log("ITEM", item);
+  let localItems = JSON.parse(localStorage.getItem("cart")) || [];
+  let localItem = localItems.find((localItem) => localItem.id === item.id);
+  console.log("LOCAL ITEM", localItems);
+  if (localItem) {
+    localItem.count = Number(localItem.count) + 1;
+  } else {
+    localItems.push(item);
+    console.log("LOCAL ITEMSS", localItems);
+  }
+  localStorage.setItem("cart", JSON.stringify(localItems));
+  return localItems;
 };
 
 export const deleteFromCart = (cartId, itemId) => {
@@ -69,6 +96,8 @@ export default function cartReducer(state = [], action) {
       } else {
         return [...state, action.item];
       }
+    case ADD_LOCAL_CART_ITEM:
+      return action.item;
     case DELETE_CART_ITEM:
       return state.filter((item) => item.clothingId !== action.item.clothingId);
     default:

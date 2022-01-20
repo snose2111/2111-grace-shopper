@@ -126,6 +126,7 @@ export class AllClothing extends React.Component {
                     <button
                       id="all-view-item-button"
                       value={item.id}
+
                       onClick={() =>
                         this.props.auth.id
                           ? this.props.addToCart(this.props.userId, {
@@ -141,6 +142,7 @@ export class AllClothing extends React.Component {
                               item.price
                             )
                       }
+
                     >
                       Add to Cart
                     </button>
