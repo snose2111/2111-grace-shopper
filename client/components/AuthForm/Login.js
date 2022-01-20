@@ -35,7 +35,7 @@ class Login extends React.Component {
             <input name="password" type="password" />
           </div>
           <div>
-            <button type="submit">Login</button>
+            <button type="submit">Log In</button>
           </div>
           {error && error.response && (
             <div className="error"> {error.response.data} </div>

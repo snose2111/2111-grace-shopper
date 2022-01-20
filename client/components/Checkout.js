@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import itemReducer from "../store/item";
 
 class Checkout extends React.Component {
   constructor(props) {
