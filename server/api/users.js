@@ -3,29 +3,23 @@ const { user } = require("pg/lib/defaults");
 const {
   models: { User, Clothing, Cart },
 } = require("../db");
-const { isAdmin } = require("./gatekeepingMiddleware");
+const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
 module.exports = router;
 
-async function requireToken(req, res, next) {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    req.user = user;
-    next();
-  } catch (err) {
-    next(err);
-  }
-}
 
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", requireToken, isAdmin, async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ["id", "username"],
-    });
-    res.json(users);
+    if(req.user.isAdmin){
+      const users = await User.findAll({
+        // explicitly select only the id and username fields - even though
+        // users' passwords are encrypted, it won't help if we just
+        // send everything to anyone who asks!
+        attributes: ["id", "username"],
+      });
+      res.json(users);
+    } else {
+      res.status(403).send("You are not authorized to see this page!")
+    }
   } catch (err) {
     next(err);
   }
@@ -33,7 +27,8 @@ router.get("/", isAdmin, async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const { username, password, email } = req.body
+    const user = await User.create({ username, password, email });
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
@@ -49,9 +44,10 @@ router.post("/signup", async (req, res, next) => {
 });
 
 // LOAD a single user
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
+    const user = await User.findByPk(req.user.id);
+    console.log("this is req.user is load single user ", req.user)
     res.json(user);
   } catch (err) {
     next(err);
@@ -59,10 +55,11 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 // UPDATE a single user.
-router.get("/:userId", async (req, res, next) => {
+router.put("/:userId", requireToken, async (req, res, next) => {
   try {
+    const { username, password, email } = req.body
     const user = await User.findByPk(req.params.userId);
-    res.json(await user.update(req.body));
+    res.json(await user.update({ username, password, email }));
   } catch (err) {
     next(err);
   }
@@ -95,7 +92,6 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
 // this should get ONLY fulfilled cart + items
 router.get("/:userId/orders", requireToken, async (req, res, next) => {
   try {
-    if (req.user.dataValues.id === Number(req.params.userId)) {
       const carts = await Cart.findAll({
         where: {
           userId: req.params.userId,
@@ -106,10 +102,8 @@ router.get("/:userId/orders", requireToken, async (req, res, next) => {
         },
       });
       res.json(carts);
-    } else {
-      res.status(404).send("You are not authorized to see this cart!");
-    }
-  } catch (err) {
+  }
+  catch (err) {
     next(err);
   }
 });

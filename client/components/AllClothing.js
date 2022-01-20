@@ -10,6 +10,7 @@ export class AllClothing extends React.Component {
     // this.handleClick = this.handleClick.bind(this);
     this.state = {
       clothing: [],
+
     };
     this.addNewItem = this.addNewItem.bind(this);
   }
@@ -19,6 +20,7 @@ export class AllClothing extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
+
     if (this.props.clothing.length !== prevProps.clothing.length) {
       this.setState({ clothing: this.props.clothing });
     }
@@ -58,6 +60,7 @@ export class AllClothing extends React.Component {
   render() {
     let clothing = this.state.clothing;
     let auth = this.props.auth;
+
     console.log("this state ===>", this.state);
 
     return (
@@ -71,6 +74,7 @@ export class AllClothing extends React.Component {
         ) : (
           <div></div>
         )}
+
 
         <div className="all-view-header">
           <span id="all-view-header-text">Shop All Clothing</span>
@@ -87,6 +91,7 @@ export class AllClothing extends React.Component {
                 <div key={item.id} className="all-view-single-card">
                   {auth.isAdmin ? (
                     <div>
+
                       <Link to={`/item/${item.id}`}>
                         <button>Edit Item </button>{" "}
                       </Link>
@@ -99,6 +104,7 @@ export class AllClothing extends React.Component {
                         {" "}
                         X
                       </button>
+
                     </div>
                   ) : (
                     <div></div>

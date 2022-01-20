@@ -2,11 +2,11 @@ const router = require("express").Router();
 const {
   models: { User, Cart, Clothing, CartItems },
 } = require("../db");
-const { requireToken } = require("./gatekeepingMiddleware");
+const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
 module.exports = router;
 
 // this route should be ADMIN only -- should allow ADMIN to access ALL ORDERS.
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, isAdmin, async (req, res, next) => {
   try {
     const orders = await Cart.findAll({
       include: {

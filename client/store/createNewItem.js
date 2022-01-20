@@ -12,6 +12,7 @@ export const _createNewItem = (item) => {
 //THUNK CREATOR
 export const createNewItem = (newItem, history) => {
   console.log("history from thunk====>", history)
+
   return async (dispatch) => {
     try {
         const { data: created } = await axios.post('/api/clothing', newItem);

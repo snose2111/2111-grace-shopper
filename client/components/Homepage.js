@@ -58,6 +58,7 @@ export class Homepage extends React.Component {
                 />
                 <h4 style={{ color: "black" }}>Accessories</h4>
               </Link>
+
             </div>
           </div>
         </div>

@@ -13,7 +13,9 @@ export const _getUsers = (users) => ({
 export const fetchUsers = () => {
     return async (dispatch) => {
       try {
-      const { data: users } = await axios.get('/api/users');
+      const token = window.localStorage.getItem('token')
+
+      const { data: users } = await axios.get('/api/users', {headers: {authorization: token}});
       dispatch(_getUsers(users));
       } catch (e) {
         console.log('fetchUsers thunk error', e)

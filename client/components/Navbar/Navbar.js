@@ -39,6 +39,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, cartSize }) => {
         {/* The navbar will show these links before you log in */}
         {/* <a href="/">{<AiOutlineHome />}LOGO</a> */}
         <a href="/">SNOSE</a>
+
       </div>
       <div className="type">
         <Link to="/shop/all">Shop All</Link>
@@ -49,10 +50,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, cartSize }) => {
       </div>
       <div className="right-navbar">
         {/* The navbar will show these links before you log in */}
-        <a href="/login">{<VscAccount />}Login</a>
+        {isLoggedIn ? (<a href="/logout" onClick={handleClick}>{<VscAccount />}Logout</a>) : (<a href="/login" >{<VscAccount />}Login</a>)}
         <a href="/cart">{<BsCart4 />} Cart (0)</a>
       </div>
     </div>
+
   );
 
   const admin = (

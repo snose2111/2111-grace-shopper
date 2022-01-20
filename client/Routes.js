@@ -31,14 +31,13 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    
+
     return (
       <div id="bottom">
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/" component={Homepage} />
-            {/* <Route path="/" exact component={Login} /> */}
-            <Route path="/login" component={Login} />
+            {/* <Route path="/login" component={Login} /> */}
             <Route path="/signup" component={Signup} />
             <Route exact path="/shop/all" component={AllClothing} />
             <Route exact path="/shop/item/:itemID" component={SingleItem} />
@@ -51,10 +50,9 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={Homepage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            {/* <Route exact path="/shop/all" component={AllClothing} /> */}
             <Route exact path="/shop/all" component={AllClothing} />
             <Route exact path="/shop/item/:itemID" component={SingleItem} />
             <Route path="/shop/:category" component={AllClothing} />
