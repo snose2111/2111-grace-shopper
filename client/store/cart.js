@@ -87,11 +87,11 @@ export default function cartReducer(state = [], action) {
       return action.cart;
     case ADD_CART_ITEM:
       const doesExist = state.filter(
-        (item) => item.clothingId === action.item.clothingId
+        (item) => item.id === action.item.id
       );
       if (doesExist.length) {
         return state.map((item) =>
-          item.clothingId === action.item.clothingId ? action.item : item
+          item.id === action.item.id ? action.item : item
         );
       } else {
         return [...state, action.item];
@@ -99,7 +99,7 @@ export default function cartReducer(state = [], action) {
     case ADD_LOCAL_CART_ITEM:
       return action.item;
     case DELETE_CART_ITEM:
-      return state.filter((item) => item.clothingId !== action.item.clothingId);
+      return state.filter((item) => item.id !== action.item.id);
     default:
       return state;
   }

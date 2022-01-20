@@ -27,7 +27,7 @@ router.get("/:clothingType", async (req, res, next) => {
 });
 
 // create item
-router.post("/", requireToken, isAdmin, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Clothing.create(req.body));
   } catch (err) {
@@ -48,7 +48,7 @@ router.get("/item/:clothingId", async (req, res, next) => {
 
 
 // update individual item
-router.put("/item/:clothingId", requireToken, isAdmin,async (req, res, next) => {
+router.put("/item/:clothingId", async (req, res, next) => {
   console.log("req.params.clothingId===>", req.params.clothingId)
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
@@ -59,7 +59,7 @@ router.put("/item/:clothingId", requireToken, isAdmin,async (req, res, next) => 
 });
 
 // delete item
-router.delete("/item/:clothingId", requireToken, isAdmin, async (req, res, next) => {
+router.delete("/item/:clothingId", async (req, res, next) => {
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
     await item.destroy();
