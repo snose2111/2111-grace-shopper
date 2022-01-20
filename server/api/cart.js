@@ -31,9 +31,10 @@ router.get("/:userId", async (req, res, next) => {
     });
     //if it exists, load all the clothes associated with the cart.
     if (cart) {
-      const clothes = await CartItems.findAll({
-        where: {
-          cartId: cart.id,
+      const clothes = await Clothing.findAll({
+        include: {
+          model: Cart,
+          where: { id: cart.id },
         },
       });
       res.json(clothes);
@@ -41,7 +42,10 @@ router.get("/:userId", async (req, res, next) => {
       // if cart does not exist, we create one
       const user = await User.findByPk(req.params.userId);
       const newCart = await user.createCart();
-      console.log(newCart);
+      const clothes = await Clothing.findAll({
+        include: { model: Cart, where: { id: newCart.id } },
+      });
+      res.json(clothes);
     }
   } catch (err) {
     next(err);
@@ -89,7 +93,11 @@ router.post("/:userId/:clothingId", async (req, res, next) => {
         }
       );
     }
-    res.status(201).json(clothes);
+    const clothingItem = await Clothing.findByPk(req.params.clothingId, {
+      include: { model: Cart },
+      where: { id: existingCart.id },
+    });
+    res.status(201).json(clothingItem);
   } catch (err) {
     next(err);
   }
