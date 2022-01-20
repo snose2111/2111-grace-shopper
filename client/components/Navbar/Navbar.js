@@ -8,7 +8,7 @@ import { VscAccount } from "react-icons/vsc";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    {/* {isLoggedIn ? ( */}
+
     <div>
       {/* The navbar will show these links after you log in */}
       <Link to="/home">Home</Link>
@@ -16,11 +16,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         Logout
       </a>
     </div>
-    {/* ) : ( */}
+
     <div className="main-nav">
       <div className="left-navbar">
-        {/* The navbar will show these links before you log in */}
-        {/* <a href="/">{<AiOutlineHome />}LOGO</a> */}
         <a href="/">LOGO</a>
         <span className="search-button">
           <input type="text" placeholder="Search..." />
@@ -38,12 +36,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </div>
       <div className="right-navbar">
         {/* The navbar will show these links before you log in */}
-        <a href="/login">{<VscAccount />}Login</a>
+        {isLoggedIn ? (<a href="/logout" onClick={handleClick}>{<VscAccount />}Logout</a>) : (<a href="/login" >{<VscAccount />}Login</a>)}
         <a href="/cart">{<BsCart4 />} Cart (0)</a>
       </div>
     </div>
-    {/* )} */}
-    {/* <hr /> */}
+
+
   </div>
 );
 

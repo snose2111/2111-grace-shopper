@@ -11,7 +11,7 @@ export class AllClothing extends React.Component {
     // this.handleClick = this.handleClick.bind(this);
     this.state = {
       clothing: [],
-      
+
     };
     this.addNewItem = this.addNewItem.bind(this);
   }
@@ -21,7 +21,7 @@ export class AllClothing extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    
+
     if (this.props.clothing.length !== prevProps.clothing.length) {
       this.setState({ clothing: this.props.clothing });
     }
@@ -62,7 +62,7 @@ export class AllClothing extends React.Component {
     let clothing = this.state.clothing;
     let auth = this.props.auth;
     console.log("this state ===>",this.state)
-    
+
     return (
       <div className="all-view">{auth.isAdmin ? (
         <div>
@@ -70,7 +70,7 @@ export class AllClothing extends React.Component {
         </div>
       ) : (<div></div>
       )}
-        
+
         <div className="all-view-header">
           <span id="all-view-header-text">Shop All Clothing</span>
           <div className="all-view-header-buttons">
@@ -86,12 +86,12 @@ export class AllClothing extends React.Component {
                 <div key={item.id} className="all-view-single-card">
                   {auth.isAdmin ? (
                     <div>
-                  <Link to={`/item/${item.id}`}><button>Edit Item </button> </Link> 
+                  <Link to={`/item/${item.id}`}><button>Edit Item </button> </Link>
                   <button
-                            type="submit" onClick = {() => {                      
+                            type="submit" onClick = {() => {
                             this.props.deleteItem(item.id);
                             }}> X
-                  </button> 
+                  </button>
                     </div>
                   ) : (<div></div>
                   )}
@@ -125,7 +125,7 @@ export class AllClothing extends React.Component {
                           price: item.price,
                           quantity: 1,
                         })
-                 
+
                      ) : (
                         this.addNewItem(
                           item.id,
@@ -133,8 +133,8 @@ export class AllClothing extends React.Component {
                           item.name,
                           item.imageUrl,
                           item.price
-                        );
-                       ) 
+                        )
+                       )
                       }
 
                     >
