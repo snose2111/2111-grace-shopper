@@ -36,7 +36,6 @@ export class Cart extends React.Component {
     this.props.deleteItem(cartId, evt.target.value);
   }
 
-
   calcTotal() {
     let clothing = this.state.cart;
     let total = 0;
@@ -44,6 +43,7 @@ export class Cart extends React.Component {
       total += Number(clothing[i].carts[0].cart_item.price);
     }
     return total;
+  }
 
   handleToken(token, addresses) {
     console.log(token, addresses);
@@ -71,7 +71,6 @@ export class Cart extends React.Component {
                         <input
                           name="quantity"
                           type="number"
-
                           min="0"
                           max={item.quantity}
                           defaultValue={item.carts[0].cart_item.quantity}
@@ -103,12 +102,10 @@ export class Cart extends React.Component {
                   <span className="total">Order Total</span>
                 </div>
                 <div id="right">
-
                   <span>${this.calcTotal()}.00</span>
                   <span>Calculated at checkout</span>
 
                   <span className="total">${this.calcTotal()}.00</span>
-
                 </div>
               </div>
             </div>

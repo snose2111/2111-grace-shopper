@@ -98,7 +98,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.isAdmin,
     cartSize: state.cart.reduce((sum, item) => {
-      return sum + item.quantity;
+      return sum + item.carts[0].cart_item.quantity;
     }, 0),
   };
 };
