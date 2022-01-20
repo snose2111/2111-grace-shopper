@@ -49,7 +49,7 @@ export default function clothingReducer(state = [], action) {
       return action.clothing;
     case DELETE_ITEM:
       console.log("reducer deleteItem")
-      return state.filter((item) => item.id !== action.item.id);  
+      return state.filter((item) => item.id !== action.item.id);
     default:
       return state;
   }

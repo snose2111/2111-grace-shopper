@@ -46,17 +46,9 @@ router.get("/item/:clothingId", async (req, res, next) => {
   }
 });
 
-// create item
-router.post("/", async (req, res, next) => {
-  try {
-    res.status(201).send(await Clothing.create(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
 
 // update individual item
-router.put("/item/:clothingId", async (req, res, next) => {
+router.put("/item/:clothingId", requireToken, isAdmin,async (req, res, next) => {
   console.log("req.params.clothingId===>", req.params.clothingId)
   try {
     const item = await Clothing.findByPk(req.params.clothingId);
