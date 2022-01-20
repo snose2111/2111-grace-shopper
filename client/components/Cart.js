@@ -13,6 +13,7 @@ export class Cart extends React.Component {
       cart: [],
     };
     this.handleClick = this.handleClick.bind(this);
+    this.calcTotal = this.calcTotal.bind(this);
     this.handleToken = this.handleToken.bind(this);
   }
 
@@ -35,6 +36,15 @@ export class Cart extends React.Component {
     this.props.deleteItem(cartId, evt.target.value);
   }
 
+
+  calcTotal() {
+    let clothing = this.state.cart;
+    let total = 0;
+    for (let i = 0; i < clothing.length; i++) {
+      total += Number(clothing[i].carts[0].cart_item.price);
+    }
+    return total;
+
   handleToken(token, addresses) {
     console.log(token, addresses);
   }
@@ -52,7 +62,7 @@ export class Cart extends React.Component {
               {cart.map((item) => (
                 <div key={item.id} id="cart-item">
                   <div id="left">
-                    <img id="cart-img" src={item.ImageURL} />
+                    <img id="cart-img" src={item.imageUrl} />
                     <div id="inner-cart-item">
                       <span id="item-name">{item.name}</span>
                       <span>{item.description}</span>
@@ -61,9 +71,10 @@ export class Cart extends React.Component {
                         <input
                           name="quantity"
                           type="number"
-                          min="1"
-                          max="999"
-                          value={item.quantity}
+
+                          min="0"
+                          max={item.quantity}
+                          defaultValue={item.carts[0].cart_item.quantity}
                           onChange={(e) => {
                             item.quantity = e.target.value;
                           }}
@@ -74,7 +85,7 @@ export class Cart extends React.Component {
                   </div>
 
                   <div id="right">
-                    <span>${item.price} USD</span>
+                    <span>${item.carts[0].cart_item.price} USD</span>
                     <button
                       id="remove-button"
                       value={item.clothingId}
@@ -89,20 +100,15 @@ export class Cart extends React.Component {
                 <div id="left">
                   <span>Total</span>
                   <span>Shipping Estimate</span>
-                  <span>Tax</span>
                   <span className="total">Order Total</span>
                 </div>
                 <div id="right">
-                  <span>
-                    ${cart.map((item) => Number(item.price)).reduce(reducer)}
-                  </span>
+
+                  <span>${this.calcTotal()}.00</span>
                   <span>Calculated at checkout</span>
-                  <span>
-                    $
-                    {cart.map((item) => Number(item.price)).reduce(reducer) *
-                      0.087}
-                  </span>
-                  <span className="total">$Total here</span>
+
+                  <span className="total">${this.calcTotal()}.00</span>
+
                 </div>
               </div>
             </div>

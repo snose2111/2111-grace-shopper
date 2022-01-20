@@ -126,11 +126,23 @@ export class AllClothing extends React.Component {
                     <button
                       id="all-view-item-button"
                       value={item.id}
-                      onClick={() => {
-                        const cartItem = item;
-                        cartItem.quantity = 1;
-                        this.props.addToCart(this.props.userId, cartItem);
-                      }}
+
+                      onClick={() =>
+                        this.props.auth.id
+                          ? this.props.addToCart(this.props.userId, {
+                              id: item.id,
+                              price: item.price,
+                              quantity: 1,
+                            })
+                          : this.addNewItem(
+                              item.id,
+                              item.type,
+                              item.name,
+                              item.imageUrl,
+                              item.price
+                            )
+                      }
+
                     >
                       Add to Cart
                     </button>
