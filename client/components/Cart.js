@@ -31,8 +31,7 @@ export class Cart extends React.Component {
   }
 
   handleClick(evt) {
-    const cartId = this.state.cart[0].cartId;
-    console.log(evt.target.value);
+    const cartId = this.state.cart[0].carts[0].id;
     this.props.deleteItem(cartId, evt.target.value);
   }
 
@@ -87,8 +86,7 @@ export class Cart extends React.Component {
                     <span>${item.carts[0].cart_item.price} USD</span>
                     <button
                       id="remove-button"
-                      value={item.clothingId}
-                      onClick={this.handleClick}
+                      onClick={() => this.props.deleteItem(item.carts[0].id, item.id)}
                     >
                       Remove
                     </button>

@@ -31,7 +31,7 @@ const Clothing = db.define("clothing", {
   },
   imageUrl: {
     type: Sequelize.STRING,
-  }
+  },
 });
 
 module.exports = Clothing;

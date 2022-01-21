@@ -163,7 +163,7 @@ async function seed() {
       color: "green",
       rating: 1.4,
       imageUrl:
-        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221545F110022_1/skims-grey-cotton-20-jersey-long-sleeve-t-shirt.jpg",
     }),
     Clothing.create({
       type: "tops",
@@ -175,7 +175,7 @@ async function seed() {
       color: "red",
       rating: 1.8,
       imageUrl:
-        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221599F109015_1/isabel-marant-etoile-navy-ajadya-shirt.jpg",
     }),
     Clothing.create({
       type: "tops",
@@ -188,7 +188,7 @@ async function seed() {
       rating: 2.38,
 
       imageUrl:
-        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221147F110001_1/anna-castellano-ssense-exclusive-brown-and-black-bee-t-shirt.jpg",
     }),
     Clothing.create({
       type: "tops",
@@ -196,11 +196,10 @@ async function seed() {
       price: 130.0,
       description: "sweater",
       quantity: 78,
-
       color: "gold",
       rating: 3.56,
       imageUrl:
-        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221777F109000_1/kim-shui-ssense-exclusive-orange-collared-mesh-shirt.jpg",
     }),
     Clothing.create({
       type: "tops",
@@ -211,7 +210,7 @@ async function seed() {
       color: "white",
       rating: 2.86,
       imageUrl:
-        "https://img.ssensemedia.com/images/b_white,c_lpad,g_south,h_1086,w_724/c_scale,h_480/f_auto,q_auto/221232F107011_1/rick-owens-silver-seb-blouse.jpg",
+        "https://img.ssensemedia.com/images/b_white,g_center,f_auto,q_auto:best/221202F358009_1/versace-jeans-couture-red-regalia-baroque-bodysuit.jpg",
     }),
   ]);
 

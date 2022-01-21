@@ -126,13 +126,16 @@ router.put("/:cartId/:clothingId", async (req, res, next) => {
 // this should allow you to DELETE an item from a cart.
 router.delete("/:cartId/:clothingId", async (req, res, next) => {
   try {
-    const clothes = await CartItems.destroy({
-      where: {
-        cartId: req.params.cartId,
-        clothingId: req.params.clothingId,
-      },
-    });
-    res.json(clothes);
+    // const clothes = await CartItems.destroy({
+    //   where: {
+    //     cartId: req.params.cartId,
+    //     clothingId: req.params.clothingId,
+    //   },
+    // });
+    const cart = await Cart.findByPk(req.params.cartId);
+    const clothingItem = await Clothing.findByPk(req.params.clothingId)
+    await cart.removeClothing(clothingItem);
+    res.json(clothingItem);
   } catch (err) {
     next(err);
   }
